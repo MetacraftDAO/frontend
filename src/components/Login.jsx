@@ -16,8 +16,6 @@ const near = await connect(config);
 const wallet = new WalletConnection(near);
 
 const signIn = async () => {
-  const accountId = wallet.getAccountId();
-  console.log("account id is: ", accountId);
   await wallet.requestSignIn(CONTRACT_NAME, "test app");
   return wallet.getAccountId();
 };

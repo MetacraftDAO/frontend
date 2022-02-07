@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 const { connect, WalletConnection, keyStores } = require("near-api-js");
 
+const CONTRACT_NAME = "katesonia2.testnet";
+
 const config = {
   networkId: "testnet",
   keyStore: new keyStores.BrowserLocalStorageKeyStore(),
@@ -16,7 +18,7 @@ const wallet = new WalletConnection(near);
 const signIn = async () => {
   const accountId = wallet.getAccountId();
   console.log("account id is: ", accountId);
-  await wallet.requestSignIn("katesonia2.testnet", "test test");
+  await wallet.requestSignIn(CONTRACT_NAME, "test app");
   return wallet.getAccountId();
 };
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Span} from "../Header/styles";
 import getConfig from "../../config/config";
 import * as nearAPI from "near-api-js"
@@ -17,10 +17,7 @@ const signIn = async () => {
 };
 
 const Login = () => {
-    const [accountId, setAccountId] = React.useState("");
-    useEffect(() => {
-        setAccountId(wallet.getAccountId());
-    }, [setAccountId]);
+    const [accountId, setAccountId] = React.useState(wallet.getAccountId());
 
     const signInOnClick = () => {
         signIn().then(

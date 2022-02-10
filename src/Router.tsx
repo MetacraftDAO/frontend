@@ -7,8 +7,15 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import {Route, Routes} from 'react-router-dom';
 import Home from "./Components/Home";
+import {ConnectedWalletAccount, Contract, WalletConnection} from "near-api-js";
 
-function Router() {
+interface Props {
+    contract: Contract,
+    currentUser: any,
+    nearConfig: any,
+    wallet: WalletConnection
+}
+const Router = ({ contract, currentUser, nearConfig, wallet }: Props) => {
   return (
       <Suspense fallback={null}>
         <Styles/>

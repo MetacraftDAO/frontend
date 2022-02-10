@@ -12,12 +12,14 @@ const wallet = new nearAPI.WalletAccount(near, null);
 console.log(wallet.getAccountId())
 
 const signIn = async () => {
-    await wallet.requestSignIn(nearConfig.contractName, "test app");
+    if (!wallet.getAccountId()) {
+        await wallet.requestSignIn(nearConfig.contractName, "test app");
+    }
     return wallet.getAccountId();
 };
 
 const Login = () => {
-    const [accountId, setAccountId] = React.useState(wallet.getAccountId());
+    const [accountId, setAccountId] = useState(wallet.getAccountId());
 
     const signInOnClick = () => {
         signIn().then(
@@ -32,17 +34,17 @@ const Login = () => {
     };
 
     const signOutOnClick = () => {
-        wallet.signOut();
+        // wallet.signOut();
         setAccountId("");
     };
 
-    const shortenAddress = (address: string, chars = 4): string => {
-        return `${address.slice(0, chars)}...${address.slice(-chars)}`;
+    const shortenAddress = (address: string, chars = 10): string => {
+        return address.length > 2*chars ? `${address.slice(0, chars)}...${address.slice(-chars)}`: address;
     };
 
     if (accountId) {
         return (
-            <Span>{shortenAddress(wallet.getAccountId())}</Span>
+            <Span onClick={signOutOnClick}>{shortenAddress(wallet.getAccountId())}</Span>
         );
     }
     return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;

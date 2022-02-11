@@ -1,30 +1,21 @@
+
 import React, {useState} from "react";
+
 import {Span} from "../Header/styles";
-import getConfig from "../../config/config";
-import * as nearAPI from "near-api-js"
-
-const nearConfig = getConfig(process.env.REACT_APP_NEAR_CONFIG_ENV || "development")
-const near = await nearAPI.connect(Object.assign({deps: {keyStore: new nearAPI.keyStores.BrowserLocalStorageKeyStore()}},
-    nearConfig));
+import {nearWallet, signIn} from "../wallet";
 
 
-const wallet = new nearAPI.WalletAccount(near, null);
-console.log(wallet.getAccountId())
-
-const signIn = async () => {
-    if (!wallet.getAccountId()) {
-        await wallet.requestSignIn(nearConfig.contractName, "test app");
-    }
-    return wallet.getAccountId();
-};
 
 const Login = () => {
-    const [accountId, setAccountId] = useState(wallet.getAccountId());
+    const [accountId, setAccountId] = React.useState("");
+    useEffect(() => {
+        setAccountId(nearWallet.getAccountId());
+    }, [setAccountId]);
 
     const signInOnClick = () => {
         signIn().then(
             (accountId) => {
-                console.log("log in wallet: ", accountId);
+                console.log("log in wallet.tsx: ", accountId);
                 setAccountId(accountId);
             },
             (err) => {
@@ -34,18 +25,14 @@ const Login = () => {
     };
 
     const signOutOnClick = () => {
-        // wallet.signOut();
-        setAccountId("");
-    };
 
-    const shortenAddress = (address: string, chars = 10): string => {
-        return address.length > 2*chars ? `${address.slice(0, chars)}...${address.slice(-chars)}`: address;
+        nearWallet.signOut();
+        setAccountId("");
     };
 
     if (accountId) {
         return (
-            <Span onClick={signOutOnClick}>{shortenAddress(wallet.getAccountId())}</Span>
-        );
+            <Span onClick={signOutOnClick}>{nearWallet.getAccountId()} (logout)</Span>
     }
     return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;
 };

@@ -2,6 +2,8 @@ import {nearWallet} from "../wallet";
 import * as nearAPI from "near-api-js";
 const BN = require('bn.js');
 
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "katesonia5.testnet"; // "katesonia2.testnet";
+
 const Mint = () => {
 
     const wallet = nearWallet;
@@ -11,7 +13,7 @@ const Mint = () => {
         console.log("mint presseed" + wallet.getAccountId());
         const contract = await new nearAPI.Contract(
             account,
-            "katesonia5.testnet",
+            CONTRACT_NAME,
             {
                 // name of contract you're connecting to
                 viewMethods: ["getMessages", "nft_metadata"], // view methods do not change state but usually return a value

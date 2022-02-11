@@ -1,6 +1,9 @@
-import React, {useEffect} from "react";
+
+import React, {useState} from "react";
+
 import {Span} from "../Header/styles";
 import {nearWallet, signIn} from "../wallet";
+
 
 
 const Login = () => {
@@ -22,6 +25,7 @@ const Login = () => {
     };
 
     const signOutOnClick = () => {
+
         nearWallet.signOut();
         setAccountId("");
     };
@@ -29,7 +33,6 @@ const Login = () => {
     if (accountId) {
         return (
             <Span onClick={signOutOnClick}>{nearWallet.getAccountId()} (logout)</Span>
-        );
     }
     return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;
 };

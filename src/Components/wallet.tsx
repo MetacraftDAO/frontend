@@ -3,7 +3,7 @@ import getConfig from "../config/config";
 import * as nearAPI from "near-api-js"
 import {WalletConnection} from "near-api-js";
 
-const nearConfig = getConfig(process.env.NODE_ENV || "development")
+const nearConfig = getConfig(process.env.REACT_APP_NEAR_CONFIG_ENV || "development")
 const near = await nearAPI.connect(Object.assign({deps: {keyStore: new nearAPI.keyStores.BrowserLocalStorageKeyStore()}},
     nearConfig));
 

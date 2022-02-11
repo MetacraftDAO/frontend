@@ -1,13 +1,12 @@
-import React, {useEffect} from "react";
+
+import React, {useState} from "react";
+
 import {Span} from "../Header/styles";
 import {nearWallet, signIn} from "../wallet";
 
 
 const Login = () => {
-    const [accountId, setAccountId] = React.useState("");
-    useEffect(() => {
-        setAccountId(nearWallet.getAccountId());
-    }, [setAccountId]);
+    const [accountId, setAccountId] = React.useState(nearWallet.getAccountId());
 
     const signInOnClick = () => {
         signIn().then(
@@ -28,8 +27,7 @@ const Login = () => {
 
     if (accountId) {
         return (
-            <Span onClick={signOutOnClick}>{nearWallet.getAccountId()} (logout)</Span>
-        );
+            <Span onClick={signOutOnClick}>{nearWallet.getAccountId()} (logout)</Span>)
     }
     return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;
 };

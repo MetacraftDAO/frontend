@@ -1,12 +1,10 @@
-
-import React, {useState} from "react";
-
+import { useState } from "react";
 import {Span} from "../Header/styles";
-import {nearWallet, signIn} from "../wallet";
+import {nearWallet, signIn} from "../wallet/wallet";
 
 
 const Login = () => {
-    const [accountId, setAccountId] = React.useState(nearWallet.getAccountId());
+    const [accountId, setAccountId] = useState(nearWallet.getAccountId());
 
     const signInOnClick = () => {
         signIn().then(

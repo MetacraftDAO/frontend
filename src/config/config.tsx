@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || "katesonia5.testnet"; // "katesonia2.testnet";
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "dev-1644775935237-43621084292867"; // "katesonia2.testnet";
 
 const getConfig = (env: string) => {
     switch (env) {

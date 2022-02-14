@@ -1,37 +1,35 @@
 import React from 'react';
 import './App.css';
 
-import {lazy, Suspense} from "react";
-import { Styles } from './styles/styles';
+import {Suspense} from "react";
+import {Styles} from './styles/styles';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import {Route, Routes} from 'react-router-dom';
-import Home from "./Components/Home";
-import {ConnectedWalletAccount, Contract, WalletConnection} from "near-api-js";
+import {Contract} from "near-api-js";
+import Dashboard from './Components/Dashboard';
 
 interface Props {
     contract: Contract,
     currentUser: any,
-    nearConfig: any,
-    wallet: WalletConnection
 }
-const Router = ({ contract, currentUser, nearConfig, wallet }: Props) => {
-  return (
-      <Suspense fallback={null}>
-        <Styles/>
-        <Header/>
 
-          {/*Routes go here*/}
-          <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/game" element={<h1>Game</h1>} />
-              <Route path="/whitepaper" element={<h1>whitepaper</h1>} />
-              <Route path="/aboutus" element={<h1>aboutus</h1>} />
-          </Routes>
+const Router = ({contract}: Props) => {
+    return (
+        <Suspense fallback={null}>
+            <Styles/>
+            <Header/>
 
-        <Footer/>
-      </Suspense>
-  );
+            <Routes>
+                <Route path="/" element={<Dashboard contract={contract}/>}/>
+                <Route path="/game" element={<h1>Game</h1>}/>
+                <Route path="/whitepaper" element={<h1>whitepaper</h1>}/>
+                <Route path="/aboutus" element={<h1>aboutus</h1>}/>
+            </Routes>
+
+            <Footer/>
+        </Suspense>
+    );
 }
 
 export default Router;

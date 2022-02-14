@@ -1,52 +1,39 @@
-import {nearWallet} from "../wallet";
-import * as nearAPI from "near-api-js";
+import { nearWallet} from "../wallet/wallet";
+import {randomSkin} from "../../config/skins"
+import {Contract} from "near-api-js";
+import { Button } from "../../styles/styles";
 const BN = require('bn.js');
 
-const CONTRACT_NAME = process.env.CONTRACT_NAME || "katesonia5.testnet"; // "katesonia2.testnet";
-
-const Mint = () => {
+interface Props {
+    contract: Contract,
+}
+const Mint = ({contract}: Props) => {
 
     const wallet = nearWallet;
-    const account = nearWallet.account();
 
     const mint = async () => {
-        console.log("mint presseed" + wallet.getAccountId());
-        const contract = await new nearAPI.Contract(
-            account,
-            CONTRACT_NAME,
-            {
-                // name of contract you're connecting to
-                viewMethods: ["getMessages", "nft_metadata"], // view methods do not change state but usually return a value
-                changeMethods: ["addMessage", "nft_mint"], // change methods modify state
-            }
-        )
         var id = Math.floor(Math.random() * 1000000000);
-        console.log(contract)
-        console.log(wallet.getAccountId())
 
-        // @ts-ignore
-        console.log(await contract.nft_metadata())
-        // @ts-ignore
-        const response = await contract.nft_mint(
+        //@ts-ignore
+        await contract.nft_mint(
             {
                 "token_id": id.toString(),
-                "receiver_id": wallet.getAccountId(),
+                "token_owner_id": wallet.getAccountId(),
                 "token_metadata": {
-                    "title": "BlocHead",
+                    "title": "BlocHead #" + id,
                     "description": "Nearcraft character",
-                    "media": "https://cdn.myminifactory.com/assets/object-assets/5dcff80379a67/images/720X720-schuin.jpg",
+                    "media": randomSkin(),
                     "copies": 1
                 }
             },
             new BN('26B4BD9110D0', 16),
             new BN('26B4BD9110DCE800000', 16)
         );
-        console.log(response);
     }
 
     return (
         <>
-            <h1 onClick={mint}>mint </h1>
+            <Button onClick={mint}> Mint </Button>
         </>
     );
 };

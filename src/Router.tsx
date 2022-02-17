@@ -8,6 +8,7 @@ import Footer from './Components/Footer';
 import {Route, Routes} from 'react-router-dom';
 import {Contract, providers} from "near-api-js";
 import Dashboard from './Components/Dashboard';
+import VerifyAccount from './Components/VerifyAccount';
 
 interface Props {
     contract: Contract,
@@ -25,7 +26,7 @@ const Router = ({contract, response}: Props) => {
                 <Route path="/game" element={<h1>Game</h1>}/>
                 <Route path="/whitepaper" element={<h1>whitepaper</h1>}/>
                 <Route path="/aboutus" element={<h1>aboutus</h1>}/>
-                <Route path="/verify" element={<h1>verify account</h1>}/>
+                <Route path="/verify" element={<VerifyAccount/>}/>
             </Routes>
 
             <Footer/>

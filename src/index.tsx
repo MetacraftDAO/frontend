@@ -5,9 +5,11 @@ import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import * as nearAPI from 'near-api-js';
-import {CONTRACT_NAME, nearWallet} from "./Components/wallet/wallet";
+import {CONTRACT_NAME, nearWallet, nearConnection, getLastTransactionStatus} from "./Components/wallet/wallet";
+import { Connection } from 'near-api-js';
 
 
+const response = await getLastTransactionStatus();
 // Initializing contract
 async function initContract() {
 
@@ -41,7 +43,8 @@ initContract()
             <React.StrictMode>
                 <BrowserRouter>
                     <Router contract={contract}
-                            currentUser={currentUser}
+                            // currentUser={currentUser}
+                            response={response}
                     />
                 </BrowserRouter>
             </React.StrictMode>,

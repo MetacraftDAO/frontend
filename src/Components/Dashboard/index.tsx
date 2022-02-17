@@ -1,15 +1,26 @@
 import Mint from "../Mint";
-import {Contract} from "near-api-js";
+import {Contract, providers} from "near-api-js";
 import DisplayNft from "../wallet/nft";
 
 import {MintSection, SectionDescription, SectionTitle, SubTitle, Title, WalletSection} from "./styles"
 import Container from "../Container";
+import {getLastTransactionStatus} from "../wallet/wallet";
+
 
 interface Props {
-    contract: Contract
+    contract: Contract,
+    response: any
 }
 
-const Dashboard = ({contract}: Props) => {
+const printMsg = (response: any) => {
+    let prefix = "" 
+    if (response && response.status != null) {
+        prefix = response.status ? "Mint succeeded!" : "Mint failed!";
+    }
+    return prefix + " " + (response? response.msg : "");
+}
+
+const Dashboard = ({contract, response}: Props) => {
     return (
         <Container>
             <Title>MetaCraft Dashboard</Title>
@@ -20,8 +31,11 @@ const Dashboard = ({contract}: Props) => {
                 <SectionTitle>Mint a BlockHead</SectionTitle>
                 <SectionDescription>
                     If you don't own a BlockHead, You can mint one for FREE by pressing the "Mint" button.
+                    <br></br>
+                    <br></br>
+                    <b>{printMsg(response)}</b>
                 </SectionDescription>
-                <Mint contract={contract}/>
+                <Mint contract={contract} response={response}/>
             </MintSection>
 
             <WalletSection>

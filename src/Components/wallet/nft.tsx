@@ -7,6 +7,11 @@ import { Button } from "../../styles/styles";
 interface Props {
     contract: Contract,
 }
+
+const getSkinImage = (nft: any) => {
+    return nft.metadata.media.replace("preview-skin", "skin");
+}
+
 const DisplayNft= ({contract}: Props) => {
     const [nfts, setNfts] = React.useState([]);
 
@@ -29,7 +34,8 @@ const DisplayNft= ({contract}: Props) => {
             {(nfts.length > 0) ?
                 nfts.map((nft) => {
                     // @ts-ignore
-                   return <Image src={nft.metadata.media} alt={"nft"}/>
+                   return (<><Image src={nft.metadata.media} alt={"nft"}/>
+                   <a href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)} target="_blank" rel="noopener noreferrer"> Change skin </a></>)
                 }) :
                 <Button onClick={mint}> Load Nfts </Button>
             }

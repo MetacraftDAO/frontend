@@ -25,6 +25,7 @@ const Router = ({contract}: Props) => {
                 <Route path="/game" element={<h1>Game</h1>}/>
                 <Route path="/whitepaper" element={<h1>whitepaper</h1>}/>
                 <Route path="/aboutus" element={<h1>aboutus</h1>}/>
+                <Route path="/verify" element={<h1>verify account</h1>}/>
             </Routes>
 
             <Footer/>

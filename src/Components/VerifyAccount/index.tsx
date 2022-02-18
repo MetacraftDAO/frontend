@@ -2,6 +2,7 @@
 import { nearWallet } from "../../libs/wallet";
 import { useState } from "react";
 import { nftContract } from '../../libs/contract';
+// import Parse from 'parse/dist/parse.min.js';
 
 
 const verify = async () => {

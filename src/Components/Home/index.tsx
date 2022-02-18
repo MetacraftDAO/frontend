@@ -14,7 +14,6 @@ import GetStarted from "../GetStarted";
 // const response = await getLastTransactionStatus();
 interface Props {
     contract: Contract,
-    response: any
 }
 
 const images = {

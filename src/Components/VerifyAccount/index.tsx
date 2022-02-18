@@ -1,7 +1,6 @@
 
 import { nearWallet } from "../wallet/wallet";
 import { useState } from "react";
-import { Contract} from "near-api-js";
 import { nftContract } from '../Contract/contract';
 
 
@@ -18,7 +17,7 @@ const verify = async () => {
 
 const currentAccountVerified = await verify();
 const displayMsg = (username: string, isVerified: boolean)=> {
-  if (!username) return "No minecraft user to verify! Pls login your minecraft account and type /verfy command to verify";
+  if (!username) return "Pls login your minecraft account and type /verify command to verify";
   return isVerified ? "Account is successfully verified!" : "Pls login with your wallet and verify";
 }
 
@@ -41,7 +40,7 @@ const VerifyAccount = () => {
 
   return (
     <>
-    <h1>Minecraft user {username}</h1>
+    <h1>{username ? "Minecraft user" + username : "No minecraft user to verify!"}</h1>
     <h1>{displayMsg(username ? username : "", isVerified)}</h1>
     <button onClick={setVerifyStatus}> Verify account </button>
     </>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderSection = styled("header")`
   padding: 1rem 0.5rem;
-  background: #084d27;
+  background: #000000;
 
   .ant-row-space-between {
     align-items: center;

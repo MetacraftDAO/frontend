@@ -1,6 +1,6 @@
 import Mint from "../Mint";
 import {Contract} from "near-api-js";
-import DisplayNft from "../wallet/nft";
+import DisplayNft from "../Nft/nft";
 
 import {MintSection, SectionDescription, SectionTitle, SubTitle, Title, WalletSection} from "./styles"
 import Container from "../Container";

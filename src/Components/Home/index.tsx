@@ -1,7 +1,6 @@
 import Mint from "../Mint";
-import {Contract, providers} from "near-api-js";
-import DisplayNft from "../wallet/nft";
-import {getLastTransactionStatus} from "../wallet/wallet";
+import {Contract} from "near-api-js";
+import DisplayNft from "../Nft/nft";
 
 
 // const response = await getLastTransactionStatus();

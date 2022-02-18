@@ -1,4 +1,4 @@
-import { nearWallet} from "./wallet";
+import { nearWallet} from "../../libs/wallet";
 import {Contract} from "near-api-js";
 import React from "react";
 import {Image} from "./styles";

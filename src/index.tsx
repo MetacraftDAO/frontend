@@ -5,8 +5,7 @@ import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import * as nearAPI from 'near-api-js';
-import {CONTRACT_NAME, nearWallet, nearConnection, getLastTransactionStatus} from "./Components/wallet/wallet";
-import { Connection } from 'near-api-js';
+import {CONTRACT_NAME, nearWallet, getLastTransactionStatus} from "./Components/wallet/wallet";
 
 
 const response = await getLastTransactionStatus();

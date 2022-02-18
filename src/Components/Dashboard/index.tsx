@@ -1,10 +1,9 @@
 import Mint from "../Mint";
-import {Contract, providers} from "near-api-js";
+import {Contract} from "near-api-js";
 import DisplayNft from "../wallet/nft";
 
 import {MintSection, SectionDescription, SectionTitle, SubTitle, Title, WalletSection} from "./styles"
 import Container from "../Container";
-import {getLastTransactionStatus} from "../wallet/wallet";
 
 
 interface Props {

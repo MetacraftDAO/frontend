@@ -1,6 +1,5 @@
 import getConfig from "../../config/config";
 import * as nearAPI from "near-api-js"
-import { stringify } from "querystring";
 
 const CONTRACT_NAME = process.env.CONTRACT_NAME || "dev-1644775935237-43621084292867"; // "katesonia2.testnet";
 
@@ -40,6 +39,5 @@ export {
     signIn,
     signOut,
     nearWallet,
-    nearConnection,
     getLastTransactionStatus
 }

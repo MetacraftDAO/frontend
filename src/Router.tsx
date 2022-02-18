@@ -9,6 +9,7 @@ import {Route, Routes} from 'react-router-dom';
 import {Contract, providers} from "near-api-js";
 import Dashboard from './Components/Dashboard';
 import VerifyAccount from './Components/VerifyAccount';
+import Home from "./Components/Home";
 
 interface Props {
     contract: Contract,
@@ -22,13 +23,10 @@ const Router = ({contract, response}: Props) => {
             <Header/>
 
             <Routes>
-                <Route path="/" element={<Dashboard contract={contract} response={response}/>}/>
-                <Route path="/game" element={<h1>Game</h1>}/>
-                <Route path="/whitepaper" element={<h1>whitepaper</h1>}/>
-                <Route path="/aboutus" element={<h1>aboutus</h1>}/>
+                <Route path="/" element={<Home contract={contract}/>}/>
                 <Route path="/verify" element={<VerifyAccount/>}/>
+                <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
             </Routes>
-
             <Footer/>
         </Suspense>
     );

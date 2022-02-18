@@ -1,5 +1,5 @@
 import {Row} from "antd";
-import {Link, useMatch} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
     NavLink,
     HeaderSection,
@@ -19,18 +19,8 @@ const Header = () => {
                     </Link>
                 </NavLink>
                 <NavLink>
-                    <Link to="/game">
-                        <Span>GAME</Span>
-                    </Link>
-                </NavLink>
-                <NavLink>
-                    <Link to="/whitepaper">
-                        <Span>WHITEPAPER</Span>
-                    </Link>
-                </NavLink>
-                <NavLink>
-                    <Link to="/aboutus">
-                        <Span>ABOUT US</Span>
+                    <Link to="/nft">
+                        <Span>NFT & GAME</Span>
                     </Link>
                 </NavLink>
                 <NavLink>

@@ -33,7 +33,7 @@ export const Styles = createGlobalStyle`
   }
 
   body {
-    margin-bottom:50px;
+    //margin-bottom:50px;
   }
 `;
 

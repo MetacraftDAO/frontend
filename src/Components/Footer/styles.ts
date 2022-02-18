@@ -1,11 +1,27 @@
 import styled from "styled-components";
 
 export const FooterSection = styled("footer")`
-  background: #DBF5D3;
-  padding: 1rem 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  background: black;
+  padding: 1rem;
+  height: 50px;
   margin-bottom: 0;
-  box-shadow: 0 50vh 0 50vh #DBF5D3;
 `;
+
+export const Img = styled.img`
+  margin: 0;
+  width: 30px;
+  padding: 0 10px 0 10px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+`
+export const Link = styled.a`
+  padding: 0;
+  text-decoration: none;
+`
+
+export const Socials = styled.div`
+  display: flex;
+  float: right;
+`

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const HeaderSection = styled("header")`
-  padding: 1rem 0.5rem;
-  background: #084d27;
-
+  padding: 1rem 4rem;
+  background: #000000;
+  width: 100%;  
   .ant-row-space-between {
     align-items: center;
     text-align: center;
@@ -20,7 +20,7 @@ export const NavLink = styled(Nav)`
   color: #ffffff;
   transition: color 0.2s ease-in;
   margin: 0.5rem 2rem;
-  
+
 `;
 
 export const Span = styled("span")`
@@ -29,12 +29,27 @@ export const Span = styled("span")`
   color: #ffffff;
   font-size: 2rem;
   font-weight: bolder;
+
   &:hover,
   &:active,
   &:focus {
-    color:  #ffffff;
+    color: #ffffff;
     text-underline-position: under;
     text-decoration: #ffffff solid underline;
     text-decoration-thickness: 0.2rem;
   }
 `;
+
+export const NavContainer = styled("div")`
+  width: 100%;
+  display: flex;
+`
+
+export const NavRight = styled.div`
+  float: right;
+  width: 100%;
+`
+export const NavLeft = styled.div`
+  float: left;
+  width: 100%;
+`

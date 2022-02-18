@@ -1,8 +1,11 @@
-import { nearWallet} from "../../libs/wallet";
+import {nearWallet} from "../../libs/wallet";
 import {Contract} from "near-api-js";
 import React from "react";
-import {Image} from "./styles";
-import { Button } from "../../styles/styles";
+import {Collection, Image,
+NFT,
+    SelectSkin,
+Stake} from "./styles";
+import {Button} from "../../styles/styles";
 
 interface Props {
     contract: Contract,
@@ -12,7 +15,7 @@ const getSkinImage = (nft: any) => {
     return nft.metadata.media.replace("preview-skin", "skin");
 }
 
-const DisplayNft= ({contract}: Props) => {
+const DisplayNft = ({contract}: Props) => {
     const [nfts, setNfts] = React.useState([]);
 
     const wallet = nearWallet;
@@ -31,14 +34,21 @@ const DisplayNft= ({contract}: Props) => {
 
     return (
         <>
+            <Collection>
+
             {(nfts.length > 0) ?
                 nfts.map((nft) => {
                     // @ts-ignore
-                   return (<><Image src={nft.metadata.media} alt={"nft"}/>
-                   <a href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)} target="_blank" rel="noopener noreferrer"> Change skin </a></>)
+                    return (<NFT><Image src={nft.metadata.media} alt={"nft"}/>
+                        <SelectSkin href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)}
+                           target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>
+                        <Stake>Stake</Stake>
+                    </NFT>)
                 }) :
                 <Button onClick={mint}> Load Nfts </Button>
             }
+            </Collection>
+
         </>
     );
 };

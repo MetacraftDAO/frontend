@@ -1,20 +1,38 @@
-import Mint from "../Mint";
 import {Contract} from "near-api-js";
-import DisplayNft from "../Nft/nft";
+import {
+    Heading,
+    Overlay,
+    Para,
+    Title
+} from "./styles";
+import Demo from "../Demo";
+import Play from "../Play";
+import GetStarted from "../GetStarted";
 
-
-// const response = await getLastTransactionStatus();
 interface Props {
     contract: Contract,
-    response: any
 }
 
-const Home = ({contract, response}:Props) => {
+const Home = ({contract}: Props) => {
+    const image1 = "https://gmedia.playstation.com/is/image/SIEPDC/minecraft-hero-banner-desktop-01-ps4-en-07jul21?$native$"
     return (
         <>
-            <h1>Welcome Home!</h1>
-            <Mint contract={contract} response={response}></Mint>
-            <DisplayNft contract={contract}></DisplayNft>
+                <Para bgImage={image1}
+                >
+                    <Overlay>
+
+                    </Overlay>
+                    <div style={{height: "70vh"}}>
+                        <Heading>
+                            <Title> Nearcraft </Title>
+                            <h1> Get NFTs and Craft your World</h1>
+                        </Heading>
+                    </div>
+                </Para>
+
+            <Demo/>
+            <Play/>
+            <GetStarted/>
         </>
     );
 };

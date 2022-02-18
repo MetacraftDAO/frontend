@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledContainer = styled("div")<any>`
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   margin-right: auto;
   margin-left: auto;
   border-top: ${(p) => (p.border ? "1px solid #CDD1D4" : "")};

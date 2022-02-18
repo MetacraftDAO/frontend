@@ -1,7 +1,7 @@
 
-import { nearWallet } from "../wallet/wallet";
+import { nearWallet } from "../../libs/wallet";
 import { useState } from "react";
-import { nftContract } from '../Contract/contract';
+import { nftContract } from '../../libs/contract';
 
 
 const verify = async () => {
@@ -40,7 +40,7 @@ const VerifyAccount = () => {
 
   return (
     <>
-    <h1>{username ? "Minecraft user" + username : "No minecraft user to verify!"}</h1>
+    <h1>{username ? "Minecraft user " + username : "No minecraft user to verify!"}</h1>
     <h1>{displayMsg(username ? username : "", isVerified)}</h1>
     <button onClick={setVerifyStatus}> Verify account </button>
     </>

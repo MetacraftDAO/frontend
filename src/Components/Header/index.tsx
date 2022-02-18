@@ -5,7 +5,7 @@ import {
     HeaderSection,
     Span,
 } from "./styles";
-import Login from "../login/Login";
+import Login from "../Login/Login";
 
 
 const Header = () => {

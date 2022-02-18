@@ -1,4 +1,4 @@
-import {CONTRACT_NAME, nearWallet} from "../wallet/wallet";
+import {CONTRACT_NAME, nearWallet} from "./wallet";
 import {Contract} from "near-api-js";
 
 

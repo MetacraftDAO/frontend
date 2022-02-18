@@ -17,7 +17,7 @@ const verify = async () => {
 
 const currentAccountVerified = await verify();
 const displayMsg = (username: string, isVerified: boolean)=> {
-  if (!username) return "Pls login your minecraft account and type /verify command to verify";
+  if (!username) return "Pls enter minecraft and type /verify command to verify";
   return isVerified ? "Account is successfully verified!" : "Pls login with your wallet and verify";
 }
 

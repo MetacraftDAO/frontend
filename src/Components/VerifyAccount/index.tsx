@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 const VerifyAccount = () => {
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(nearWallet.isSignedIn());
 
   const verify = () => {
     setIsVerified(nearWallet.isSignedIn());

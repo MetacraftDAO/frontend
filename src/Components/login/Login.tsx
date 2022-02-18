@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Span} from "../Header/styles";
-import {nearWallet, signIn} from "../wallet/wallet";
+import {nearWallet, signIn} from "../../libs/wallet";
 
 
 const Login = () => {

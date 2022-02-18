@@ -1,4 +1,4 @@
-import { nearWallet} from "../wallet/wallet";
+import { nearWallet} from "../../libs/wallet";
 import {randomSkin} from "../../config/skins"
 import {Contract} from "near-api-js";
 import { Button } from "../../styles/styles";
@@ -6,13 +6,22 @@ const BN = require('bn.js');
 
 interface Props {
     contract: Contract,
+    response: any
 }
-const Mint = ({contract}: Props) => {
+
+const removeParamsFromUrl= ()=> {
+    var url= document.location.href;
+    window.history.pushState({}, "", url.split("?")[0]);
+}
+
+const Mint = ({contract, response}: Props) => {
 
     const wallet = nearWallet;
 
     const mint = async () => {
         var id = Math.floor(Math.random() * 1000000000);
+
+        removeParamsFromUrl();
 
         //@ts-ignore
         await contract.nft_mint(
@@ -33,6 +42,7 @@ const Mint = ({contract}: Props) => {
 
     return (
         <>
+            {/* {response} */}
             <Button onClick={mint}> Mint </Button>
         </>
     );

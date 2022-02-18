@@ -17,6 +17,8 @@ export const SectionTitle = styled.div`
 export const SubSection = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 3rem auto 2rem;
 `
 

@@ -3,30 +3,38 @@ import {Link} from "react-router-dom";
 import {
     NavLink,
     HeaderSection,
-    Span,
+    Span, NavContainer, NavLeft, NavRight,
 } from "./styles";
 import Login from "../login/Login";
-
 
 const Header = () => {
 
     const MenuItem = () => {
         return (
-            <>
-                <NavLink>
-                    <Link to="/">
-                        <Span>HOME</Span>
-                    </Link>
-                </NavLink>
-                <NavLink>
-                    <Link to="/nft">
-                        <Span>NFT & GAME</Span>
-                    </Link>
-                </NavLink>
-                <NavLink>
-                    <Login/>
-                </NavLink>
-            </>
+            <NavContainer>
+                <NavLeft>
+                    <NavLink>
+                        <Link to="/">
+                            <Span>HOME</Span>
+                        </Link>
+                    </NavLink>
+                    <NavLink>
+                        <Link to="/nft">
+                            <Span>NFT & GAME</Span>
+                        </Link>
+                    </NavLink>
+                    <NavLink>
+                        <Link to="/verify">
+                            <Span>PLAY NOW</Span>
+                        </Link>
+                    </NavLink>
+                </NavLeft>
+                <NavRight>
+                    <NavLink>
+                        <Login/>
+                    </NavLink>
+                </NavRight>
+            </NavContainer>
         );
     };
 

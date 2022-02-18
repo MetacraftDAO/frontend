@@ -8,14 +8,15 @@ import Footer from './Components/Footer';
 import {Route, Routes} from 'react-router-dom';
 import {Contract} from "near-api-js";
 import Dashboard from './Components/Dashboard';
-import Home from "./Components/Home";
+import Home from './Components/Home'
+import VerifyAccount from './Components/VerifyAccount';
 
 interface Props {
     contract: Contract,
-    currentUser: any,
+    response: any
 }
 
-const Router = ({contract}: Props) => {
+const Router = ({contract, response}: Props) => {
     return (
         <Suspense fallback={null}>
             <Styles/>
@@ -23,7 +24,8 @@ const Router = ({contract}: Props) => {
 
             <Routes>
                 <Route path="/" element={<Home contract={contract}/>}/>
-                <Route path="/nft" element={<Dashboard contract={contract}/>}/>
+                <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
+                <Route path="/verify" element={<VerifyAccount/>}/>
             </Routes>
 
             <Footer/>

@@ -1,6 +1,6 @@
 import { nearWallet} from "../../libs/wallet";
 import {randomSkin} from "../../config/skins"
-import {Contract, utils, providers} from "near-api-js";
+import {Contract} from "near-api-js";
 import { Button } from "../../styles/styles";
 const BN = require('bn.js');
 

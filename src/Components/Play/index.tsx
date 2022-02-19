@@ -9,6 +9,7 @@ import {
 import Container from "../Container";
 
 const Play = () => {
+    const verify = "/verify"
     return (
         <Section>
             <Container>
@@ -21,7 +22,7 @@ const Play = () => {
                     Check out how to get started and have more fun...
                 </SectionDescription>
 
-                <PlayNow>Play Now</PlayNow>
+                <PlayNow href={verify}>Play Now</PlayNow>
             </Container>
 
         </Section>

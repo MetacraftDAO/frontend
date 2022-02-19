@@ -32,7 +32,7 @@ const writeNewVerifiedUserToDB = async (uuid: string, username: string, nearAcco
   await User.save();
 }
 
-const updateExistingVerifiedUserToDB = async (User: any, uuid: string, username: string, nearAccountId: string, isVerified: boolean) => {
+const updateExistingVerifiedUserInDB = async (User: any, uuid: string, username: string, nearAccountId: string, isVerified: boolean) => {
   User.set("uuid", uuid);
   User.set("username", username);
   User.set("nearAccountId", nearAccountId);
@@ -57,7 +57,7 @@ const verify = async (uuid: string | null, username: string | null) => {
     if (!existingUser) {
       await writeNewVerifiedUserToDB(uuid, username, nearAccountId, true);
     } else {
-      await updateExistingVerifiedUserToDB(existingUser, uuid, username, nearAccountId, true);
+      await updateExistingVerifiedUserInDB(existingUser, uuid, username, nearAccountId, true);
     }
     return [username, true, "Account is successfully verified!"];
   }
@@ -68,7 +68,7 @@ const verify = async (uuid: string | null, username: string | null) => {
     return [verifiedUser.get('username'), true, "Account is successfully verified!"];
   }
 
-  await updateExistingVerifiedUserToDB(
+  await updateExistingVerifiedUserInDB(
     verifiedUser, uuid ? uuid : verifiedUser.get('uuid'), 
     username ? username : verifiedUser.get('username'), 
     nearAccountId, true);

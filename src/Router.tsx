@@ -27,7 +27,6 @@ const Router = ({contract, response}: Props) => {
                 <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
                 <Route path="/verify" element={<VerifyAccount/>}/>
             </Routes>
-
             <Footer/>
         </Suspense>
     );

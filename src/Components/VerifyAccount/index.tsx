@@ -1,5 +1,5 @@
 
-import { nearWallet } from "../../libs/wallet";
+import { nearWallet, signIn } from "../../libs/wallet";
 import { useState } from "react";
 import { nftContract } from '../../libs/contract';
 //@ts-ignore
@@ -10,7 +10,9 @@ Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAV
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
 
 const connectedWalletAndHasNft = async () => {
-  if(!nearWallet.isSignedIn()) return false;
+  if(!nearWallet.isSignedIn()) {
+    await signIn();
+  }
   //@ts-ignore
   const nfts = await nftContract.nft_tokens_for_owner(
     {

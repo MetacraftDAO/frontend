@@ -23,11 +23,11 @@ const Header = () => {
                             <Span>NFT & GAME</Span>
                         </Link>
                     </NavLink>
-                    <NavLink>
+                    {/* <NavLink>
                         <Link to="/verify">
                             <Span>PLAY NOW</Span>
                         </Link>
-                    </NavLink>
+                    </NavLink> */}
                 </NavLeft>
                 <NavRight>
                     <NavLink>

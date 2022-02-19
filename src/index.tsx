@@ -6,11 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import * as nearAPI from 'near-api-js';
 import {CONTRACT_NAME, nearWallet, getLastTransactionStatus} from "./libs/wallet";
+//@ts-ignore
+import Parse from 'parse/dist/parse.min.js';
 
 
 const response = await getLastTransactionStatus();
 // Initializing contract
-async function initContract() {
+async function init() {
 
     // Load in account data
     let currentUser;
@@ -36,7 +38,7 @@ async function initContract() {
     return {contract, currentUser};
 }
 
-initContract()
+init()
     .then(({contract, currentUser}) => {
         ReactDOM.render(
             <React.StrictMode>

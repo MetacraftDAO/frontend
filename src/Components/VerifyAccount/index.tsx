@@ -40,6 +40,8 @@ const updateExistingVerifiedUserInDB = async (User: any, uuid: string, username:
   await User.save();
 }
 
+const DEFAULT_SUCCESS_MSG = "Account is successfully verified! Go back to game and type /login or simplely re-login to enjoy the game!"
+
 const verify = async (uuid: string | null, username: string | null) => {
   // If wallet not connected or have no nft, return false.
   let connected = await connectedWalletAndHasNft();
@@ -57,26 +59,23 @@ const verify = async (uuid: string | null, username: string | null) => {
     if (!existingUser) {
       await writeNewVerifiedUserToDB(uuid, username, nearAccountId, true);
     } else {
+      // Update the existing uuid player to current near account id.ß
       await updateExistingVerifiedUserInDB(existingUser, uuid, username, nearAccountId, true);
     }
-    return [username, true, "Account is successfully verified!"];
+    return [username, true, DEFAULT_SUCCESS_MSG];
   }
 
-  // If there is a existing DB object for near account id, already verified and the near account is the same as current account
-  // No need to update the DB.
+  // If there is a existing DB object for near account id, it's already verified and 
+  // the near account is the same as current account, then no need to update the DB.
   if (verifiedUser.get('isVerified') && (verifiedUser.get('username') == username || !username)) {
-    return [verifiedUser.get('username'), true, "Account is successfully verified!"];
+    return [verifiedUser.get('username'), true, DEFAULT_SUCCESS_MSG];
   }
 
   await updateExistingVerifiedUserInDB(
     verifiedUser, uuid ? uuid : verifiedUser.get('uuid'), 
     username ? username : verifiedUser.get('username'), 
     nearAccountId, true);
-  return [username ? username : verifiedUser.get('username'), true, "Account is successfully verified!"];
-}
-
-const displayMsg = (isVerified: boolean)=> {
-  return isVerified ? "Account is successfully verified!" : "Pls login with your wallet and verify";
+  return [username ? username : verifiedUser.get('username'), true, ];
 }
 
 const fetchVerifiedUserByNearAccountId = async (nearAccountId: string) => {

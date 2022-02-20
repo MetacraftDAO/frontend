@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import {nearWallet} from "../../libs/wallet";
 import { Button } from "../../styles/styles";

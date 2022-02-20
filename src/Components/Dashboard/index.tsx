@@ -1,6 +1,7 @@
 import Mint from "../Mint";
 import {Contract} from "near-api-js";
 import DisplayNft from "../Nft/nft";
+import BuildToken from "../BuildToken";
 
 import {MintSection, SectionDescription, SectionTitle, SubTitle, Title, WalletSection} from "./styles"
 import Container from "../Container";
@@ -44,6 +45,12 @@ const Dashboard = ({contract, response}: Props) => {
                     can also download the skin to use it on your Minecraft character.
                 </SectionDescription>
                 <DisplayNft contract={contract}/>
+
+                <SectionTitle>Your Unclaimed $BUILD</SectionTitle>
+                <SectionDescription>
+                    Show $BUILD you have earned!
+                </SectionDescription>
+                <BuildToken/>
             </WalletSection>
 
         </Container>

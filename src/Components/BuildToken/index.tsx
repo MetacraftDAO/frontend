@@ -5,8 +5,6 @@ import { Button } from "../../styles/styles";
 import Parse from 'parse/dist/parse.min.js';
 import {tokenContract} from "../../libs/contract";
 
-const BN = require('bn.js');
-
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
 

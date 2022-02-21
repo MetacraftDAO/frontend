@@ -46,11 +46,10 @@ const registerUserIfNeeded = async () => {
 
 }
 
-await registerUserIfNeeded();
-
 export {
   nftContract,
-  tokenContract
+  tokenContract,
+  registerUserIfNeeded
 }
 
 

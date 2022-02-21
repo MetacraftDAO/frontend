@@ -1,5 +1,6 @@
 import getConfig from "../config/config";
-import * as nearAPI from "near-api-js"
+import * as nearAPI from "near-api-js";
+import {registerUserIfNeeded} from "./contract";
 
 
 const nearConfig = getConfig(process.env.REACT_APP_NEAR_CONFIG_ENV || "development")
@@ -9,7 +10,10 @@ const nearConnection = await nearAPI.connect(Object.assign({deps: {keyStore: new
 const nearWallet = new nearAPI.WalletAccount(nearConnection, null);
 
 const signIn = async () => {
-    await nearWallet.requestSignIn(nearConfig.contractName, "test app");
+    if (!nearWallet.getAccountId()) {
+        await nearWallet.requestSignIn(nearConfig.contractName, "test app");
+    }
+    await registerUserIfNeeded();
     return nearWallet.getAccountId();
 };
 

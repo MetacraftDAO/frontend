@@ -9,12 +9,23 @@ import {
     Stake
 } from "./styles";
 
+//@ts-ignore
+import Parse from 'parse/dist/parse.min.js';
+
+Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
+Parse.serverURL = process.env.REACT_APP_HOST_URL;
+
 interface Props {
     contract: Contract,
 }
 
 const getSkinImage = (nft: any) => {
     return nft.metadata.media.replace("preview-skin", "skin");
+}
+
+//@ts-ignore
+const getNftStakeStatus= async (nft)=>{
+
 }
 
 const DisplayNft = ({contract}: Props) => {
@@ -40,8 +51,6 @@ const DisplayNft = ({contract}: Props) => {
         })
 
         setNfts(newNfts)
-
-        setNfts(newNfts)
     }
 
     if (nfts.length <= 0) {
@@ -52,18 +61,44 @@ const DisplayNft = ({contract}: Props) => {
         // setAccountId("");
     };
 
-    const unstake = (token_id: string) => {
-        console.log("stake")
+    const unstake = async (token_id: string) => {
+        console.log("unstake");
+        const query = new Parse.Query("StakeNft");
+        // use the equalTo filter to look for user which the name is John. this filter can be 
+        // used in any data type
+        query.equalTo('nearAccountId', nearWallet.getAccountId());
+        let results = await query.findAll();
+        let playTime = new Parse.Object("StakeNft");
+        if (results.length > 0) {
+            playTime = results[0];
+        }
+        playTime.set("nearAccountId", 0);
+        playTime.set("tokenId", token_id);
+        playTime.set("staked", false);
+      
+        await playTime.save();
     }
 
-    const stake = (token_id: string) => {
-        console.log("un stake")
+    const stake = async (token_id: string) => {
+        console.log("stake");
+        const query = new Parse.Query("StakeNft");
+        // use the equalTo filter to look for user which the name is John. this filter can be used in any data type
+        query.equalTo('nearAccountId', nearWallet.getAccountId());
+        let results = await query.findAll();
+        let playTime = new Parse.Object("StakeNft");
+        if (results.length > 0) {
+            playTime = results[0];
+        }
+        playTime.set("nearAccountId", 0);
+        playTime.set("tokenId", token_id);
+        playTime.set("staked", true);
+      
+        await playTime.save();
     }
 
     return (
         <>
             <Collection>
-
                 {(nfts.length > 0) ?
                     nfts.map((nft) => {
                         console.log(nft)
@@ -75,9 +110,9 @@ const DisplayNft = ({contract}: Props) => {
                             {(nft.isStaked) ?
                                 <>
                                     <p>Earned Blocks: {nft.earnedBlocks}</p>
-                                    <Stake onClick={() => stake(nft.token_id)}>UnStake</Stake>
+                                    <Stake onClick={() => unstake(nft.token_id)}>UnStake</Stake>
                                 </>
-                                : <Stake onClick={() => unstake(nft.token_id)}>Stake</Stake>}
+                                : <Stake onClick={() => stake(nft.token_id)}>Stake</Stake>}
                         </NFT>)
                     }) : <p>You do not own any BlockHeads</p>
                 }

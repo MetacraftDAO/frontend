@@ -139,4 +139,7 @@ const VerifyAccount = () => {
   )
 }
 
-export default VerifyAccount
+export {
+  VerifyAccount,
+  fetchVerifiedUserByNearAccountId
+}

@@ -9,7 +9,7 @@ import {Route, Routes} from 'react-router-dom';
 import {Contract} from "near-api-js";
 import Dashboard from './Components/Dashboard';
 import Home from './Components/Home'
-import VerifyAccount from './Components/VerifyAccount';
+import {VerifyAccount} from './Components/VerifyAccount';
 
 interface Props {
     contract: Contract,

@@ -10,6 +10,7 @@ import {
 } from "./styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
+import {fetchVerifiedUserByNearAccountId} from "../VerifyAccount";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
@@ -87,6 +88,16 @@ const DisplayNft = ({contract}: Props) => {
       
         await stakedNft.save();
         reloadNfts();
+
+        let allStakedNfts = await getAllStakedNfts(nearWallet.getAccountId());
+        //@ts-ignore
+        if (allStakedNfts.length == 0) {
+            let verifiedUser = await fetchVerifiedUserByNearAccountId(nearWallet.getAccountId());
+            if (verifiedUser) {
+                verifiedUser.set("isVerified", false);
+                await verifiedUser.save();
+            }
+        }
     }
     
     const stake = async (token_id: string) => {

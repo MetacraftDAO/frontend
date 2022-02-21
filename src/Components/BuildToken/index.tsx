@@ -112,7 +112,7 @@ const BuildToken = () => {
             {numBuild > 0 && <Button onClick={claimToken}>Claim</Button>}
             <br></br>
             <br></br>
-            <h1> Your current build balance: {balance} $BUILD</h1>
+            <h1> Your current balance: {balance} $BUILD</h1>
     </>
   )
 }

@@ -28,11 +28,29 @@ const getNftStakeStatus= async (nft)=>{
 
 }
 
+const getStakedNft = async (accountId: string) => {
+    const query = new Parse.Query("StakeNft");
+    // use the equalTo filter to look for user which the name is John. this filter can be 
+    // used in any data type
+    query.equalTo('nearAccountId', accountId);
+    let results = await query.findAll();
+    return results.length > 0 ? results[0]: null;
+}
+
+const getAllStakedNfts = async (accountId: string) => {
+    const query = new Parse.Query("StakeNft");
+    // use the equalTo filter to look for user which the name is John. this filter can be 
+    // used in any data type
+    query.equalTo('nearAccountId', accountId);
+    query.equalTo('staked', true);
+    return await query.findAll();
+}
+
 const DisplayNft = ({contract}: Props) => {
     const [nfts, setNfts] = React.useState<any[]>([]);
 
-    const [overlay, setOverlay] = useState(false)
-    const [displayInfo, setDisplayInfo] = useState(new Map())
+    const [overlay, setOverlay] = useState(false);
+    const [displayInfo, setDisplayInfo] = useState(new Map());
 
     const wallet = nearWallet;
     const mint = async () => {
@@ -43,14 +61,17 @@ const DisplayNft = ({contract}: Props) => {
             }
         );
 
-
+        let stakedNfts = await getAllStakedNfts(nearWallet.getAccountId());
+        let stakedTokenIds = new Set();
+        // @ts-ignore
+        stakedNfts.forEach((nft) => {stakedTokenIds.add(nft.get("tokenId"));});
         // @ts-ignore
         const newNfts = response.map(nft => {
-            nft['isStaked'] = false; //TODO: call db
+            nft['isStaked'] = stakedTokenIds.has(nft['token_id']); 
             nft['earnedBlocks'] = 0;
             nft['hover'] = false;
             displayInfo.set(nft['token_id'], false);
-            return nft
+            return nft;
         })
 
         setNfts(newNfts)
@@ -59,21 +80,13 @@ const DisplayNft = ({contract}: Props) => {
     if (nfts.length <= 0) {
         mint()
     }
-    const signOutOnClick = () => {
-        nearWallet.signOut();
-        // setAccountId("");
-    };
 
     const unstake = async (token_id: string) => {
         console.log("unstake");
-        const query = new Parse.Query("StakeNft");
-        // use the equalTo filter to look for user which the name is John. this filter can be 
-        // used in any data type
-        query.equalTo('nearAccountId', nearWallet.getAccountId());
-        let results = await query.findAll();
-        let playTime = new Parse.Object("StakeNft");
-        if (results.length > 0) {
-            playTime = results[0];
+        let playTime = await getStakedNft(token_id); 
+        if (!playTime) {
+            // No nft to unstake.
+            return;
         }
         playTime.set("nearAccountId", 0);
         playTime.set("tokenId", token_id);
@@ -84,13 +97,9 @@ const DisplayNft = ({contract}: Props) => {
 
     const stake = async (token_id: string) => {
         console.log("stake");
-        const query = new Parse.Query("StakeNft");
-        // use the equalTo filter to look for user which the name is John. this filter can be used in any data type
-        query.equalTo('nearAccountId', nearWallet.getAccountId());
-        let results = await query.findAll();
-        let playTime = new Parse.Object("StakeNft");
-        if (results.length > 0) {
-            playTime = results[0];
+        let playTime = await getStakedNft(token_id); 
+        if (!playTime) {
+            playTime = new Parse.Object("StakeNft");
         }
         playTime.set("nearAccountId", 0);
         playTime.set("tokenId", token_id);
@@ -137,17 +146,15 @@ const DisplayNft = ({contract}: Props) => {
                                     : <></>}
                             </Frame>
 
-
-
                             <NFTName>{nft.metadata.title}</NFTName>
                             <SelectSkin href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)}
                                         target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>
                             {(nft.isStaked) ?
                                 <>
                                     <p>Earned Blocks: {nft.earnedBlocks}</p>
-                                    <Stake onClick={() => unstake(nft.token_id)}>UnStake</Stake>
+                                    <Stake onClick={() => unstake(nft.token_id.toString())}>UnStake</Stake>
                                 </>
-                                : <Stake onClick={() => stake(nft.token_id)}>Stake</Stake>}
+                                : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
                         </NFT>)
                     }) : <p>You do not own any BlockHeads</p>
                 }

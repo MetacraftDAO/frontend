@@ -17,9 +17,9 @@ export const Collection = styled.div`
 `
 
 export const NFT = styled.div`
-  //border: 2px solid #282c34;
+  border: 2px solid #282c34;
   width: 175px;
-  height: 300px;
+  //height: 300px;
   margin: 1rem;
 `
 
@@ -37,5 +37,21 @@ const Link = styled.a`
 export const SelectSkin = styled(Link)`
 `
 
-export const Stake = styled(Link)`
+export const Stake = styled.p`
+  display: block;
+  padding: 0.3rem;
+  color: #282c34;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 2px solid #15843C;
+  border-radius: 20px;
+  margin: 1rem 0;
+`
+
+export const NFTName = styled.p`
+  display: block;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family:  sans-serif;
 `

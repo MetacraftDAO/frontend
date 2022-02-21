@@ -1,11 +1,11 @@
 import {Row} from "antd";
 import {Link} from "react-router-dom";
+import Login from "../login/Login";
 import {
     NavLink,
     HeaderSection,
     Span, NavContainer, NavLeft, NavRight,
 } from "./styles";
-import Login from "../Login/Login";
 
 const Header = () => {
 
@@ -21,11 +21,6 @@ const Header = () => {
                     <NavLink>
                         <Link to="/nft">
                             <Span>NFT & GAME</Span>
-                        </Link>
-                    </NavLink>
-                    <NavLink>
-                        <Link to="/verify">
-                            <Span>PLAY NOW</Span>
                         </Link>
                     </NavLink>
                 </NavLeft>

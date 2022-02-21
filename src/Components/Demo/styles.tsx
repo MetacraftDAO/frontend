@@ -6,6 +6,12 @@ export const Section = styled.div`
   text-align: center;
   padding: 4rem;
 `
+
+export const Section2 = styled.div`
+  background-color: #15843C;
+  padding: 0 4rem;
+`
+
 export const SectionTitle = styled.div`
   color: #15843C;
   font-size: 1.8rem;

@@ -1,7 +1,7 @@
 import { nearWallet} from "../../libs/wallet";
 import {randomSkin} from "../../config/skins"
 import {Contract} from "near-api-js";
-import { Button } from "../../styles/styles";
+import { Button } from "./styles";
 const BN = require('bn.js');
 
 interface Props {
@@ -19,7 +19,7 @@ const Mint = ({contract, response}: Props) => {
     const wallet = nearWallet;
 
     const mint = async () => {
-        var id = Math.floor(Math.random() * 1000000000);
+        var id = Math.floor(Math.random() * 10000);
 
         removeParamsFromUrl();
 
@@ -42,8 +42,7 @@ const Mint = ({contract, response}: Props) => {
 
     return (
         <>
-            {/* {response} */}
-            <Button onClick={mint}> Mint </Button>
+            <Button onClick={mint}> Mint Now </Button>
         </>
     );
 };

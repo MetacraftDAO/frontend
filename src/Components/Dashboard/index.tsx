@@ -3,7 +3,14 @@ import {Contract} from "near-api-js";
 import DisplayNft from "../Nft/nft";
 import BuildToken from "../BuildToken";
 
-import {MintSection, SectionDescription, SectionTitle, SubTitle, Title, WalletSection} from "./styles"
+import {
+    MintSection,
+    SectionDescription,
+    SectionTitle,
+    WalletSection,
+    Section,
+    Bg
+} from "./styles"
 import Container from "../Container";
 
 
@@ -13,48 +20,50 @@ interface Props {
 }
 
 const printMsg = (response: any) => {
-    let prefix = "" 
+    let prefix = ""
     if (response && response.status != null) {
         prefix = response.status ? "Mint succeeded!" : "Mint failed!";
     }
-    return prefix + " " + (response? response.msg : "");
+    return prefix + " " + (response ? response.msg : "");
 }
 
 const Dashboard = ({contract, response}: Props) => {
     return (
-        <Container>
-            <Title>MetaCraft Dashboard</Title>
-            <SubTitle> Conect to MetaCraft to start generating $BLOCK.
-                You need to have at least one staked BlockHead to verify</SubTitle>
+        <>
+            <Bg>
+                <Container>
+                    <SectionTitle>
+                        When Minecraft meets Blockchain
+                    </SectionTitle>
+                    <SectionDescription>
+                        Mint you BlockHead now to dive into the NearCraft Metaverse!
+                    </SectionDescription>
+                    <Mint contract={contract} response={response}/>
+                </Container>
+            </Bg>
+            <Section>
+                <Container>
+                        <SectionTitle>Your Unstaked BlockHeads</SectionTitle>
+                        <SectionDescription>
+                            Stake your BlockHeads to earn $BLOCKs and use them as skins in NearCraft! Once staked, they
+                            will
+                            remain staked for 3 days minimum, with no maximum duration. Once $BLOCK is claimed, you'll
+                            be able
+                            to use these utility
+                            tokens for upcoming features, and other future projects.
+                        </SectionDescription>
+                        <DisplayNft contract={contract}/>
 
-            <MintSection>
-                <SectionTitle>Mint a BlockHead</SectionTitle>
-                <SectionDescription>
-                    If you don't own a BlockHead, You can mint one for FREE by pressing the "Mint" button.
-                    <br></br>
-                    <br></br>
-                    <b>{printMsg(response)}</b>
-                </SectionDescription>
-                <Mint contract={contract} response={response}/>
-            </MintSection>
-
-            <WalletSection>
-                <SectionTitle>Your Unstaked BlockHeads</SectionTitle>
-                <SectionDescription>
-                    Click to select a BlockHead. Stake your BlockHead to use them in Metacraft or to rent them out. You
-                    can also download the skin to use it on your Minecraft character.
-                </SectionDescription>
-                <DisplayNft contract={contract}/>
-
-                <SectionTitle>Your Unclaimed $BUILD</SectionTitle>
-                <SectionDescription>
-                    Show $BUILD you have earned!
-                </SectionDescription>
-                <BuildToken/>
-            </WalletSection>
-
-        </Container>
-    );
+                        <SectionTitle>Your Unclaimed $BUILD</SectionTitle>
+                        <SectionDescription>
+                            Show $BUILD you have earned!
+                        </SectionDescription>
+                        <BuildToken/>
+                </Container>
+            </Section>
+        </>
+    )
+        ;
 };
 
 export default Dashboard;

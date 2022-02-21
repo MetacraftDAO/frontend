@@ -39,8 +39,7 @@ const GetStarted = () => {
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        Stake to access unique mechanics such as renting, Plot claiming, and $BLOCK generation.
-
+                        Stake to access unique mechanics such as renting, Plot claiming, and $BUILD generation.
                     </ActionDescription>
                     <ActionButton href={nftpage}>Stake NOW</ActionButton>
                     </ActionBox>
@@ -52,9 +51,9 @@ const GetStarted = () => {
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        $BLOCK tokens are ERC20 tokens that are generated with in-game activity in Minecraft and staked NFTs. $BLOCK can be used for for purchasing plots and other in-game items. More to come...
+                        $BUILD tokens are ERC20 tokens that are generated with in-game activity in Minecraft and staked NFTs. $BUILD can be used for for purchasing plots and other in-game items. More to come...
                     </ActionDescription>
-                    <ActionButton href={nftpage}>Claim $BLOCK NOW</ActionButton>
+                    <ActionButton href={nftpage}>Claim $BUILD NOW</ActionButton>
                     </ActionBox>
                 </SubSection>
 

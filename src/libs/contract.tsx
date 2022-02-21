@@ -22,7 +22,7 @@ const tokenContract = await new Contract(
   TOKEN_CONTRACT_NAME,
   {
       viewMethods: ["ft_balance_of"], // view methods do not change state but usually return a value
-      changeMethods: ["mint"], // change methods modify state
+      changeMethods: ["mint", "storage_deposit"], // change methods modify state
   }
 )
 

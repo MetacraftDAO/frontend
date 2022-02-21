@@ -41,15 +41,15 @@ const getBuildGenerated = async () => {
     return playTime.get('accumulatedPlayTime') / 60;
 }
 
-// const registerStorage = async (accountId: string) => {
-//   //@ts-ignore
-//   const response = await tokenContract.storage_deposit(
-//     {
-//         "account_id": accountId
-//     },
-//     new BN('26B4BD9110D0', 16),
-//     new BN('26B4BD9110DCE800000', 16));
-// }
+const registerStorage = async (accountId: string) => {
+  //@ts-ignore
+  const response = await tokenContract.storage_deposit(
+    {
+        "account_id": accountId
+    },
+    new BN('26B4BD9110D0', 16),
+    new BN('26B4BD9110DCE800000', 16));
+}
 
 // await registerStorage(nearWallet.getAccountId());
 
@@ -61,11 +61,18 @@ const mint = async (amount: number) => {
     });
 }
 
-
 const BuildToken = () => {
   const [numBuild, setNumBuild] = useState(0);
+  getBuildGenerated().then((build) => {
+    setNumBuild(build);
+    setDisplayBuild(true);
+  });
+
   const [displayBuild, setDisplayBuild] = useState(false);
-  const [tokenClaimed, setTokenClaimed] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");  
+  getLastTransactionStatus().then((response) => {
+    setResponseMsg(response.msg);
+  });  
 
   const setAccumulatedBuild = () => {
     getBuildGenerated().then((build) => {
@@ -75,29 +82,32 @@ const BuildToken = () => {
   }
 
   const claimToken = () => {
+    registerStorage(nearWallet.getAccountId()).then(()=> {
+      console.log("Register contract storage deposit.");
+    });
     mint(numBuild).then(()=> {
       console.log("Claimed blocks!");
-      setTokenClaimed(true);
       setNumBuild(0);
     });
     resetPlayTime(nearWallet.getAccountId()).then(() => {
       console.log("Reset accumulated play time to 0");
-    }
-    );
+    });
+    getLastTransactionStatus().then((response) => {
+      setResponseMsg(response.msg);
+    });    
+
   }
 
   return (
     <>
-        {displayBuild && (
-          <>
-            <h1> {numBuild} $BUILD to claim </h1> 
+        (
+            <h1>{numBuild} $BUILD to claim </h1> 
+            <h1>{responseMsg ? "Successfully claimed $BUILDs!" : ""}</h1>
             <Button onClick={setAccumulatedBuild}>Refresh</Button>
             <br></br>
             <br></br>
-            {/* {response} */}
             {numBuild > 0 && <Button onClick={claimToken}>Claim</Button>}
-          </>)}
-        {!displayBuild && <Button onClick={setAccumulatedBuild}> Load $BUILD </Button>}
+        )
     </>
   )
 }

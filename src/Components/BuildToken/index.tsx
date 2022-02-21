@@ -44,6 +44,7 @@ const getBuildGenerated = async () => {
 // await registerStorage(nearWallet.getAccountId());
 
 const mint = async (amount: number) => {
+  await resetPlayTime(nearWallet.getAccountId());
   //@ts-ignore
   await tokenContract.mint(
     {
@@ -76,14 +77,7 @@ const BuildToken = () => {
     mint(numBuild).then(()=> {
       console.log("Claimed blocks!");
       setNumBuild(0);
-    });
-    resetPlayTime(nearWallet.getAccountId()).then(() => {
-      console.log("Reset accumulated play time to 0");
-    });
-    getLastTransactionStatus().then((response) => {
-      setResponseMsg(response.msg);
     });    
-
   }
 
   return (

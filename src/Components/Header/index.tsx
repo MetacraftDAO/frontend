@@ -1,6 +1,6 @@
 import {Row} from "antd";
 import {Link} from "react-router-dom";
-import Login from "../login/Login";
+import Login from "../Login/Login";
 import {
     NavLink,
     HeaderSection,

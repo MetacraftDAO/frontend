@@ -50,6 +50,17 @@ const mint = async (amount: number) => {
     });
 }
 
+const getTokenBalance = async () => {
+  //@ts-ignore
+  const response = await tokenContract.ft_balance_of(
+      {
+          "account_id": nearWallet.getAccountId()
+      }
+  );
+
+  return response;
+} 
+
 const BuildToken = () => {
   const [numBuild, setNumBuild] = useState(0);
   getBuildGenerated().then((build) => {
@@ -64,6 +75,8 @@ const BuildToken = () => {
     }
     setResponseMsg(msg);
   });  
+
+  const [balance, setBalance] = useState(0);
 
   if (nearWallet.getAccountId() && numBuild > 0) {
     registerUserIfNeeded().then(() => {
@@ -84,6 +97,11 @@ const BuildToken = () => {
     });    
   }
 
+
+  getTokenBalance().then((amount) => {
+    setBalance(parseInt(amount) / 1e5);
+  })
+
   return (
     <>
             <h1>{numBuild} $BUILD to claim </h1>
@@ -92,6 +110,9 @@ const BuildToken = () => {
             <br/>
             <br/>
             {numBuild > 0 && <Button onClick={claimToken}>Claim</Button>}
+            <br></br>
+            <br></br>
+            <h1> Your current build balance: {balance} $BUILD</h1>
     </>
   )
 }

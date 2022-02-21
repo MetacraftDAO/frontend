@@ -5,7 +5,8 @@ import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import * as nearAPI from 'near-api-js';
-import {CONTRACT_NAME, nearWallet, getLastTransactionStatus} from "./libs/wallet";
+import {nearWallet, getLastTransactionStatus} from "./libs/wallet";
+import { nftContract } from './libs/contract';
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
 
@@ -24,15 +25,7 @@ async function init() {
     }
 
     // Initializing our contract APIs by contract name and configuration
-    const contract = await new nearAPI.Contract(
-        nearWallet.account(),
-        CONTRACT_NAME,
-        {
-            // name of contract you're connecting to
-            viewMethods: ["getMessages", "nft_metadata", "nft_tokens_for_owner"], // view methods do not change state but usually return a value
-            changeMethods: ["addMessage", "nft_mint"], // change methods modify state
-        }
-    )
+    const contract = nftContract;
 
     // contract.
     return {contract, currentUser};

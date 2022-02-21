@@ -48,7 +48,7 @@ const DEFAULT_SUCCESS_MSG = "Account is successfully verified! Go back to game a
 const verify = async (uuid: string | null, username: string | null) => {
   // If wallet not connected or have no nft, return false.
   let connected = await connectedWalletAndHasNft();
-  if (!connected) return [username, false, "Connect your wallet and mint a nft to start playing"];
+  if (!connected) return [username, false, "Stake a blockhead nft to start playing"];
   let nearAccountId = nearWallet.getAccountId();
 
   let verifiedUser = await fetchVerifiedUserByNearAccountId(nearAccountId);

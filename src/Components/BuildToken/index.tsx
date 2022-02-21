@@ -41,16 +41,6 @@ const getBuildGenerated = async () => {
     return playTime.get('accumulatedPlayTime') / 60;
 }
 
-const registerStorage = async (accountId: string) => {
-  //@ts-ignore
-  const response = await tokenContract.storage_deposit(
-    {
-        "account_id": accountId
-    },
-    new BN('26B4BD9110D0', 16),
-    new BN('26B4BD9110DCE800000', 16));
-}
-
 // await registerStorage(nearWallet.getAccountId());
 
 const mint = async (amount: number) => {
@@ -79,9 +69,6 @@ const BuildToken = () => {
   }
 
   const claimToken = () => {
-    registerStorage(nearWallet.getAccountId()).then(()=> {
-      console.log("Register contract storage deposit.");
-    });
     mint(numBuild).then(()=> {
       console.log("Claimed blocks!");
       setNumBuild(0);

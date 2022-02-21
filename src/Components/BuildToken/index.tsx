@@ -3,7 +3,7 @@ import {nearWallet, getLastTransactionStatus} from "../../libs/wallet";
 import { Button } from "../../styles/styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
-import {tokenContract} from "../../libs/contract";
+import {tokenContract, registerUserIfNeeded} from "../../libs/contract";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
@@ -64,6 +64,12 @@ const BuildToken = () => {
     }
     setResponseMsg(msg);
   });  
+
+  if (nearWallet.getAccountId() && numBuild > 0) {
+    registerUserIfNeeded().then(() => {
+      console.log("create storage deposit to interate with BUILD contract");
+    });
+  }
 
   const setAccumulatedBuild = () => {
     getBuildGenerated().then((build) => {

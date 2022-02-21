@@ -46,11 +46,8 @@ const registerUserIfNeeded = async () => {
 
 }
 
-if (nearWallet.getAccountId()) {
-  await registerUserIfNeeded();
-}
-
 export {
+  registerUserIfNeeded,
   nftContract,
   tokenContract
 }

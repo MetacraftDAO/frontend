@@ -26,6 +26,8 @@ const Router = ({contract, response}: Props) => {
                 <Route path="/" element={<Home contract={contract}/>}/>
                 <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
                 <Route path="/verify" element={<VerifyAccount/>}/>
+                <Route path="/map"/>
+                <Route path="/whitepaper"/>
             </Routes>
             <Footer/>
         </Suspense>

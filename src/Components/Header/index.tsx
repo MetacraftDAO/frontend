@@ -25,8 +25,13 @@ const Header = () => {
                         </Link>
                     </NavLink>
                     <NavLink>
-                        <Link to="/verify">
-                            <Span>PLAY NOW</Span>
+                        <Link to="/map">
+                            <Span>MAP</Span>
+                        </Link>
+                    </NavLink>
+                    <NavLink>
+                        <Link to="/whitepaper">
+                            <Span>WHITEPAPER</Span>
                         </Link>
                     </NavLink>
                 </NavLeft>

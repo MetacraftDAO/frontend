@@ -156,4 +156,7 @@ const DisplayNft = ({contract}: Props) => {
     );
 };
 
-export default DisplayNft;
+export {
+    DisplayNft,
+    getAllStakedNfts
+}

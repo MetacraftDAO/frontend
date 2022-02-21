@@ -5,6 +5,7 @@ import { nftContract } from '../../libs/contract';
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
 import { Button } from "../Mint/styles";
+import {getAllStakedNfts} from "../Nft/nft";
 
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
@@ -15,12 +16,14 @@ const connectedWalletAndHasNft = async () => {
     await signIn();
   }
   //@ts-ignore
-  const nfts = await nftContract.nft_tokens_for_owner(
-    {
-        "account_id": nearWallet.getAccountId()
-    }
-  );
-  return nfts.length > 0;
+  // const nfts = await nftContract.nft_tokens_for_owner(
+  //   {
+  //       "account_id": nearWallet.getAccountId()
+  //   }
+  // );
+  let stakedNfts = await getAllStakedNfts(nearWallet.getAccountId());
+
+  return stakedNfts.length > 0;
 }
 
 const writeNewVerifiedUserToDB = async (uuid: string, username: string, nearAccountId: string, isVerified: boolean) => {

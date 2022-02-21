@@ -1,6 +1,6 @@
 import Mint from "../Mint";
 import {Contract} from "near-api-js";
-import DisplayNft from "../Nft/nft";
+import {DisplayNft} from "../Nft/nft";
 import BuildToken from "../BuildToken";
 
 import {

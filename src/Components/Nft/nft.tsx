@@ -40,15 +40,20 @@ const getAllStakedNfts = async (tokenId: string) => {
     return await query.findAll();
 }
 
+const getStringTokenId = (token_id: string) => {
+    return "blockhead_" + token_id;
+}
+
 const unstake = async (token_id: string) => {
     console.log("unstake");
-    let playTime = await getStakedNft(token_id); 
+    let strTokenId = getStringTokenId(token_id);
+    let playTime = await getStakedNft(strTokenId); 
     if (!playTime) {
         // No nft to unstake.
         return;
     }
     playTime.set("nearAccountId", 0);
-    playTime.set("tokenId", token_id);
+    playTime.set("tokenId", strTokenId);
     playTime.set("staked", false);
   
     await playTime.save();
@@ -56,12 +61,13 @@ const unstake = async (token_id: string) => {
 
 const stake = async (token_id: string) => {
     console.log("stake");
-    let playTime = await getStakedNft(token_id); 
+    let strTokenId = getStringTokenId(token_id);
+    let playTime = await getStakedNft(strTokenId); 
     if (!playTime) {
         playTime = new Parse.Object("StakeNft");
     }
     playTime.set("nearAccountId", 0);
-    playTime.set("tokenId", token_id);
+    playTime.set("tokenId", strTokenId);
     playTime.set("staked", true);
   
     await playTime.save();

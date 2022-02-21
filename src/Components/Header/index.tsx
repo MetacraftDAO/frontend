@@ -5,8 +5,8 @@ import {
     HeaderSection,
     Span, NavContainer, NavLeft, NavRight,
 } from "./styles";
-import Login from "../login/Login";
-import Login2 from "../login/Login2";
+import Login from "../Login/Login";
+import Login2 from "../Login/Login2";
 
 const Header = () => {
 

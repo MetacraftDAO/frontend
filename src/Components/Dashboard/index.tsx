@@ -35,7 +35,7 @@ const Dashboard = ({contract, response}: Props) => {
                         When Minecraft meets Blockchain
                     </SectionTitle>
                     <SectionDescription>
-                        Mint you BlockHead now to dive into the NearCraft Metaverse!
+                        Mint you BlockHead now to dive into the MetaCraft Metaverse!
                     </SectionDescription>
                     <b>{printNftMintMsg(response)}</b>
                     <Mint contract={contract} response={response}/>
@@ -45,7 +45,7 @@ const Dashboard = ({contract, response}: Props) => {
                 <Container>
                     <SectionTitle>Your Unstaked BlockHeads</SectionTitle>
                     <SectionDescription>
-                        Stake your BlockHeads to earn $BUILDs and use them as skins in NearCraft! Once staked, they
+                        Stake your BlockHeads to earn $BUILDs and use them as skins in MetaCraft! Once staked, they
                         will
                         remain staked for 3 days minimum, with no maximum duration. Once $BUILD is claimed, you'll
                         be able

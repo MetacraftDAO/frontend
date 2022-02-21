@@ -49,8 +49,11 @@ const Link = styled.a`
 export const SelectSkin = styled(Link)`
 `
 
-export const Stake = styled.p`
+export const Stake = styled.button`
+  background: none;
+  cursor:pointer;
   display: block;
+  width: 100%;
   padding: 0.3rem;
   color: #282c34;
   font-size: 1.5rem;
@@ -58,6 +61,7 @@ export const Stake = styled.p`
   border: 2px solid #15843C;
   border-radius: 10px;
   margin: 1rem 0;
+  font-family: 'minecraftchmc',sans-serif;
 `
 
 export const NFTName = styled.p`

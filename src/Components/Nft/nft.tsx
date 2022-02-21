@@ -8,7 +8,6 @@ import {
     NFTName,
     Stake, NftTraits, Frame, Trait
 } from "./styles";
-
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
 
@@ -23,34 +22,55 @@ const getSkinImage = (nft: any) => {
     return nft.metadata.media.replace("preview-skin", "skin");
 }
 
-//@ts-ignore
-const getNftStakeStatus= async (nft)=>{
-
-}
-
-const getStakedNft = async (accountId: string) => {
+const getStakedNft = async (tokenId: string) => {
     const query = new Parse.Query("StakeNft");
     // use the equalTo filter to look for user which the name is John. this filter can be 
     // used in any data type
-    query.equalTo('nearAccountId', accountId);
+    query.equalTo('tokenId', tokenId);
     let results = await query.findAll();
     return results.length > 0 ? results[0]: null;
 }
 
-const getAllStakedNfts = async (accountId: string) => {
+const getAllStakedNfts = async (tokenId: string) => {
     const query = new Parse.Query("StakeNft");
     // use the equalTo filter to look for user which the name is John. this filter can be 
     // used in any data type
-    query.equalTo('nearAccountId', accountId);
+    query.equalTo('tokenId', tokenId);
     query.equalTo('staked', true);
     return await query.findAll();
 }
 
+const unstake = async (token_id: string) => {
+    console.log("unstake");
+    let playTime = await getStakedNft(token_id); 
+    if (!playTime) {
+        // No nft to unstake.
+        return;
+    }
+    playTime.set("nearAccountId", 0);
+    playTime.set("tokenId", token_id);
+    playTime.set("staked", false);
+  
+    await playTime.save();
+}
+
+const stake = async (token_id: string) => {
+    console.log("stake");
+    let playTime = await getStakedNft(token_id); 
+    if (!playTime) {
+        playTime = new Parse.Object("StakeNft");
+    }
+    playTime.set("nearAccountId", 0);
+    playTime.set("tokenId", token_id);
+    playTime.set("staked", true);
+  
+    await playTime.save();
+}
+
 const DisplayNft = ({contract}: Props) => {
     const [nfts, setNfts] = React.useState<any[]>([]);
-
-    const [overlay, setOverlay] = useState(false);
-    const [displayInfo, setDisplayInfo] = useState(new Map());
+    const [overlay, setOverlay] = useState(false)
+    const [displayInfo, setDisplayInfo] = useState(new Map())
 
     const wallet = nearWallet;
     const mint = async () => {
@@ -81,44 +101,16 @@ const DisplayNft = ({contract}: Props) => {
         mint()
     }
 
-    const unstake = async (token_id: string) => {
-        console.log("unstake");
-        let playTime = await getStakedNft(token_id); 
-        if (!playTime) {
-            // No nft to unstake.
-            return;
-        }
-        playTime.set("nearAccountId", 0);
-        playTime.set("tokenId", token_id);
-        playTime.set("staked", false);
-      
-        await playTime.save();
-    }
-
-    const stake = async (token_id: string) => {
-        console.log("stake");
-        let playTime = await getStakedNft(token_id); 
-        if (!playTime) {
-            playTime = new Parse.Object("StakeNft");
-        }
-        playTime.set("nearAccountId", 0);
-        playTime.set("tokenId", token_id);
-        playTime.set("staked", true);
-      
-        await playTime.save();
-    }
-
     const hover = (token_id: string) => {
-
         displayInfo.set(token_id, true)
         console.log("hover", displayInfo.get(token_id))
 
         setDisplayInfo(displayInfo)
-        // setOverlay(true)
+        setOverlay(true)
     }
     const hoverleave = (token_id:string) => {
         console.log("leave", token_id)
-        // setOverlay(false)
+        setOverlay(false)
         displayInfo.set(token_id,false)
         setDisplayInfo(displayInfo)
     }
@@ -135,8 +127,7 @@ const DisplayNft = ({contract}: Props) => {
                             >
                                 <Image src={nft.metadata.media} alt={"nft"}
                                 />
-
-                                {(displayInfo.get(nft.token_id))?
+                                {(overlay)?
                                     <NftTraits>
                                     <Trait>Skin Type: Robot</Trait>
                                     <Trait> $BUILD Earned: 100</Trait>
@@ -151,7 +142,6 @@ const DisplayNft = ({contract}: Props) => {
                                         target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>
                             {(nft.isStaked) ?
                                 <>
-                                    <p>Earned Blocks: {nft.earnedBlocks}</p>
                                     <Stake onClick={() => unstake(nft.token_id.toString())}>UnStake</Stake>
                                 </>
                                 : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}

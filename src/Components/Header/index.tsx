@@ -23,6 +23,16 @@ const Header = () => {
                             <Span>NFT & GAME</Span>
                         </Link>
                     </NavLink>
+                    <NavLink>
+                        <Link to="/map">
+                            <Span>MAP</Span>
+                        </Link>
+                    </NavLink>
+                    <NavLink>
+                        <Link to="/whitepaper">
+                            <Span>WHITEPAPER</Span>
+                        </Link>
+                    </NavLink>
                 </NavLeft>
                 <NavRight>
                     <NavLink>

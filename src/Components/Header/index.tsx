@@ -1,11 +1,12 @@
 import {Row} from "antd";
 import {Link} from "react-router-dom";
-import Login from "../Login/Login";
 import {
     NavLink,
     HeaderSection,
     Span, NavContainer, NavLeft, NavRight,
 } from "./styles";
+import Login from "../login/Login";
+import Login2 from "../login/Login2";
 
 const Header = () => {
 
@@ -24,19 +25,17 @@ const Header = () => {
                         </Link>
                     </NavLink>
                     <NavLink>
-                        <Link to="/map">
-                            <Span>MAP</Span>
-                        </Link>
-                    </NavLink>
-                    <NavLink>
-                        <Link to="/whitepaper">
-                            <Span>WHITEPAPER</Span>
+                        <Link to="/verify">
+                            <Span>PLAY NOW</Span>
                         </Link>
                     </NavLink>
                 </NavLeft>
                 <NavRight>
                     <NavLink>
                         <Login/>
+                    </NavLink>
+                    <NavLink>
+                        <Login2/>
                     </NavLink>
                 </NavRight>
             </NavContainer>

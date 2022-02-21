@@ -1,33 +1,36 @@
 import { useState } from "react";
-import {Span} from "../Header/styles";
-import {nearWallet, signIn} from "../../libs/wallet";
-
+import { Span } from "../Header/styles";
+import { nearWallet, signIn } from "../../libs/wallet";
+import { isNullishCoalesce } from "typescript";
+declare var window: any;
 
 const Login = () => {
-    const [accountId, setAccountId] = useState(nearWallet.getAccountId());
+  const [defaultAccount, setDefaultAccount] = useState(null);
 
-    const signInOnClick = () => {
-        signIn().then(
-            (accountId) => {
-                console.log("log in wallet.tsx: ", accountId);
-                setAccountId(accountId);
-            },
-            (err) => {
-                console.error(err);
-            }
-        );
-    };
-
-    const signOutOnClick = () => {
-        nearWallet.signOut();
-        setAccountId("");
-    };
-
-    if (accountId) {
-        return (
-            <Span onClick={signOutOnClick}>{nearWallet.getAccountId()} (logout)</Span>)
+  const connectWalletHandler = () => {
+    if (window.ethereum) {
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then((result) => {
+          accountChangedHandler(result[0]);
+        });
     }
-    return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;
+  };
+
+  const accountChangedHandler = (newAccount) => {
+    setDefaultAccount(newAccount);
+  };
+
+  const signOutOnClick = () => {
+    setDefaultAccount(null);
+  };
+  
+  if (defaultAccount) {
+    return (
+      <Span onClick={signOutOnClick}>{defaultAccount} (logout)</Span>
+    );
+  }
+  return <Span onClick={connectWalletHandler}> Connect with MetaMask</Span>;
 };
 
 export default Login;

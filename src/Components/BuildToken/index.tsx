@@ -57,7 +57,7 @@ const mint = async (amount: number) => {
   //@ts-ignore
   await tokenContract.mint(
     {
-        "amount": (amount * 1e5).toString()
+        "amount": Math.floor(amount * 1e5).toString()
     });
 }
 

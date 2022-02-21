@@ -22,15 +22,17 @@ const getLastTransactionStatus = async ()=> {
     let queryString = window.location.search;
     let urlParams = new URLSearchParams(queryString);
     let txHash = urlParams.get('transactionHashes');
+    let method = "";
     if (txHash) {
         let txHashDecoded = nearAPI.utils.serialize.base_decode(txHash == null ? "" : txHash);
         let response = await nearConnection.connection.provider.txStatus(txHashDecoded, nearWallet.getAccountId());
+        method = response.transaction.actions[0].FunctionCall.method_name;
         if(response.status.hasOwnProperty("SuccessValue")) return {"status": true, "msg": "Transaction succeeded"};
     }
 
     let errorMsg = urlParams.get('errorMessage');
     if (errorMsg) return {"status": false, "msg": decodeURI(errorMsg)};
-    return {"status": null, "msg":""};
+    return {"status": null, "msg":"", "method": method};
 }
 
 export {

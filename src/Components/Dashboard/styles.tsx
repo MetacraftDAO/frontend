@@ -46,3 +46,11 @@ export const Bg = styled(Section)`
   border: 0;
   //background-position: center bottom;
 `
+
+export const Hr = styled.hr`
+  background-color:darkgreen;
+  padding: 2px;
+  left: 50%;
+  border-style: none;
+  margin: 0 -4rem;
+`

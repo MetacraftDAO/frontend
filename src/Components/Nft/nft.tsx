@@ -1,12 +1,12 @@
 import {nearWallet} from "../../libs/wallet";
 import {Contract} from "near-api-js";
-import React from "react";
+import React, {useState} from "react";
 import {
     Collection, Image,
     NFT,
     SelectSkin,
     NFTName,
-    Stake
+    Stake, NftTraits, Frame, Trait
 } from "./styles";
 
 //@ts-ignore
@@ -31,9 +31,10 @@ const getNftStakeStatus= async (nft)=>{
 const DisplayNft = ({contract}: Props) => {
     const [nfts, setNfts] = React.useState<any[]>([]);
 
+    const [overlay, setOverlay] = useState(false)
+    const [displayInfo, setDisplayInfo] = useState(new Map())
 
     const wallet = nearWallet;
-
     const mint = async () => {
         //@ts-ignore
         const response = await contract.nft_tokens_for_owner(
@@ -47,6 +48,8 @@ const DisplayNft = ({contract}: Props) => {
         const newNfts = response.map(nft => {
             nft['isStaked'] = false; //TODO: call db
             nft['earnedBlocks'] = 0;
+            nft['hover'] = false;
+            displayInfo.set(nft['token_id'], false);
             return nft
         })
 
@@ -96,6 +99,21 @@ const DisplayNft = ({contract}: Props) => {
         await playTime.save();
     }
 
+    const hover = (token_id: string) => {
+
+        displayInfo.set(token_id, true)
+        console.log("hover", displayInfo.get(token_id))
+
+        setDisplayInfo(displayInfo)
+        // setOverlay(true)
+    }
+    const hoverleave = (token_id:string) => {
+        console.log("leave", token_id)
+        // setOverlay(false)
+        displayInfo.set(token_id,false)
+        setDisplayInfo(displayInfo)
+    }
+
     return (
         <>
             <Collection>
@@ -103,7 +121,24 @@ const DisplayNft = ({contract}: Props) => {
                     nfts.map((nft) => {
                         console.log(nft)
                         return (<NFT>
-                            <Image src={nft.metadata.media} alt={"nft"}/>
+                            <Frame
+                                onMouseEnter={() => hover(nft.token_id)} onMouseLeave={() => hoverleave(nft.token_id)}
+                            >
+                                <Image src={nft.metadata.media} alt={"nft"}
+                                />
+
+                                {(displayInfo.get(nft.token_id))?
+                                    <NftTraits>
+                                    <Trait>Skin Type: Robot</Trait>
+                                    <Trait> $BUILD Earned: 100</Trait>
+                                    <Trait>Date Staked: 10/21/21</Trait>
+                                    <Trait>Staked Duration 1d 1H 20M</Trait>
+                                    </NftTraits>
+                                    : <></>}
+                            </Frame>
+
+
+
                             <NFTName>{nft.metadata.title}</NFTName>
                             <SelectSkin href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)}
                                         target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>

@@ -80,14 +80,12 @@ const BuildToken = () => {
 
   return (
     <>
-        (
-            <h1>{numBuild} $BUILD to claim </h1> 
+            <h1>{numBuild} $BUILD to claim </h1>
             <h1>{responseMsg ? "Successfully claimed $BUILDs!" : ""}</h1>
             <Button onClick={setAccumulatedBuild}>Refresh</Button>
-            <br></br>
-            <br></br>
+            <br/>
+            <br/>
             {numBuild > 0 && <Button onClick={claimToken}>Claim</Button>}
-        )
     </>
   )
 }

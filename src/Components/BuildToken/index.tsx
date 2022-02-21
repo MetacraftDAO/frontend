@@ -59,7 +59,11 @@ const BuildToken = () => {
 
   const [responseMsg, setResponseMsg] = useState("");  
   getLastTransactionStatus().then((response) => {
-    setResponseMsg(response.msg);
+    let msg = ""
+    if (response && response.status != null && response.method == 'mint') {
+      msg = "Successfully claimed $BUILD!";
+    }
+    setResponseMsg(msg);
   });  
 
   const setAccumulatedBuild = () => {

@@ -12,12 +12,12 @@ interface Props {
     response: any
 }
 
-const printMsg = (response: any) => {
-    let prefix = "" 
-    if (response && response.status != null) {
-        prefix = response.status ? "Mint succeeded!" : "Mint failed!";
+const printNftMintMsg = (response: any) => {
+    if (response && response.status != null && response.method == 'nft_mint') {
+        let prefix = response.status ? "Mint succeeded!" : "";
+        return prefix + " " + (response? response.msg : "");
     }
-    return prefix + " " + (response? response.msg : "");
+    return "";
 }
 
 const Dashboard = ({contract, response}: Props) => {
@@ -33,7 +33,7 @@ const Dashboard = ({contract, response}: Props) => {
                     If you don't own a BlockHead, You can mint one for FREE by pressing the "Mint" button.
                     <br></br>
                     <br></br>
-                    <b>{printMsg(response)}</b>
+                    <b>{printNftMintMsg(response)}</b>
                 </SectionDescription>
                 <Mint contract={contract} response={response}/>
             </MintSection>

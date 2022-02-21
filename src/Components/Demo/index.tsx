@@ -23,6 +23,10 @@ const Demo = () => {
                     Play, Earn and Own plots of land and NFTs in Minecraft the Metaverse.
                 </SectionDescription>
 
+                <SectionDescription>
+                    Server Number: 18.219.218.172
+                </SectionDescription>
+
                 <Video src="https://www.youtube.com/embed/MmB9b5njVbA"
                        title="YouTube video player" frameBorder="0"
                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

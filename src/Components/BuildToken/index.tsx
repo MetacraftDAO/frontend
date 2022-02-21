@@ -3,7 +3,7 @@ import {nearWallet, getLastTransactionStatus} from "../../libs/wallet";
 import { Button } from "../../styles/styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
-import {tokenContract, registerUserIfNeeded} from "../../libs/contract";
+import {tokenContract, isTokenApproved, approveToken} from "../../libs/contract";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
@@ -36,7 +36,7 @@ const getBuildGenerated = async () => {
     let playTime = await getAccumulatedPlayTime(nearWallet.getAccountId());
     if (!playTime) return 0;
 
-    return playTime.get('accumulatedPlayTime') / 60;
+    return playTime.get('accumulatedPlayTime') / 60.0;
 }
 
 // await registerStorage(nearWallet.getAccountId());
@@ -67,6 +67,13 @@ const BuildToken = () => {
     setNumBuild(build);
   });
 
+  const [tokenApproved, setTokenApproved] = useState(false);
+    if (numBuild > 0) {
+    isTokenApproved().then((approved: boolean) => {
+      setTokenApproved(approved);
+    })
+  }
+
   const [responseMsg, setResponseMsg] = useState("");  
   getLastTransactionStatus().then((response) => {
     let msg = ""
@@ -77,12 +84,6 @@ const BuildToken = () => {
   });  
 
   const [balance, setBalance] = useState(0);
-
-  if (nearWallet.getAccountId() && numBuild > 0) {
-    registerUserIfNeeded().then(() => {
-      console.log("create storage deposit to interate with BUILD contract");
-    });
-  }
 
   const setAccumulatedBuild = () => {
     getBuildGenerated().then((build) => {
@@ -97,6 +98,13 @@ const BuildToken = () => {
     });    
   }
 
+  const setApproveToken = () => {
+    approveToken().then(() => {
+      console.log("create storage deposit to interate with BUILD contract");
+      setTokenApproved(true);
+    });
+  }
+
 
   getTokenBalance().then((amount) => {
     setBalance(parseInt(amount) / 1e5);
@@ -109,7 +117,7 @@ const BuildToken = () => {
             <Button onClick={setAccumulatedBuild}>Refresh</Button>
             <br/>
             <br/>
-            {numBuild > 0 && <Button onClick={claimToken}>Claim</Button>}
+            {numBuild > 0 && (tokenApproved ? <Button onClick={claimToken}>Claim</Button> : <Button onClick={setApproveToken}>Approve</Button>)}
             <br></br>
             <br></br>
             <h1> Your current balance: {balance} $BUILD</h1>

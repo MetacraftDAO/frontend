@@ -27,14 +27,16 @@ const tokenContract = await new Contract(
   }
 )
 
-const registerUserIfNeeded = async () => {
+const isTokenApproved = async () => {
   //@ts-ignore
   const storageBalance = await tokenContract.storage_balance_of(
     {
         "account_id": nearWallet.getAccountId()
     });
+  return storageBalance? true : false;
+}
 
-  if (!storageBalance) {
+const approveToken = async () => {
     //@ts-ignore
     await tokenContract.storage_deposit(
       {
@@ -42,12 +44,12 @@ const registerUserIfNeeded = async () => {
       },
       new BN('26B4BD9110D0', 16),
       new BN('26B4BD9110DCE800000', 16));
-  }
 
 }
 
 export {
-  registerUserIfNeeded,
+  isTokenApproved,
+  approveToken,
   nftContract,
   tokenContract
 }

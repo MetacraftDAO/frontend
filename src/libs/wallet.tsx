@@ -27,7 +27,7 @@ const getLastTransactionStatus = async ()=> {
         let txHashDecoded = nearAPI.utils.serialize.base_decode(txHash == null ? "" : txHash);
         let response = await nearConnection.connection.provider.txStatus(txHashDecoded, nearWallet.getAccountId());
         method = response.transaction.actions[0].FunctionCall.method_name;
-        if(response.status.hasOwnProperty("SuccessValue")) return {"status": true, "msg": "Transaction succeeded"};
+        if(response.status.hasOwnProperty("SuccessValue")) return {"status": true, "msg": "Transaction succeeded", "method": method};
     }
 
     let errorMsg = urlParams.get('errorMessage');

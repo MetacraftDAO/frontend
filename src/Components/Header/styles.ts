@@ -19,7 +19,7 @@ export const NavLink = styled(Nav)`
   font-size: 1.2rem;
   color: #ffffff;
   transition: color 0.2s ease-in;
-  margin: 0.5rem 2rem;
+  margin: 0.5rem 1rem;
 
 `;
 

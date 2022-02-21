@@ -29,8 +29,8 @@ const Mint = ({contract, response}: Props) => {
                 "token_id": id.toString(),
                 "token_owner_id": wallet.getAccountId(),
                 "token_metadata": {
-                    "title": "BlocHead #" + id,
-                    "description": "Nearcraft character",
+                    "title": "BlockHead #" + id,
+                    "description": "MetaCraft character",
                     "media": randomSkin(),
                     "copies": 1
                 }

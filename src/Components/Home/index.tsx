@@ -25,7 +25,7 @@ const Home = ({contract}: Props) => {
                     </Overlay>
                     <div style={{height: "70vh"}}>
                         <Heading>
-                            <Title> Nearcraft </Title>
+                            <Title> MetaCraft </Title>
                             <h1> Get NFTs and Craft your World</h1>
                         </Heading>
                     </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { nftContract } from '../../libs/contract';
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
-import { Button } from "../../styles/styles";
+import { Button } from "../Mint/styles";
 
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);

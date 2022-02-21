@@ -65,10 +65,8 @@ const BuildToken = () => {
   const [numBuild, setNumBuild] = useState(0);
   getBuildGenerated().then((build) => {
     setNumBuild(build);
-    setDisplayBuild(true);
   });
 
-  const [displayBuild, setDisplayBuild] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");  
   getLastTransactionStatus().then((response) => {
     setResponseMsg(response.msg);
@@ -77,7 +75,6 @@ const BuildToken = () => {
   const setAccumulatedBuild = () => {
     getBuildGenerated().then((build) => {
         setNumBuild(build);
-        setDisplayBuild(true);
     });
   }
 

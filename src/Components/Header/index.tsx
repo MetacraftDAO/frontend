@@ -31,7 +31,7 @@ const Header = () => {
                     </NavLink>
                     <NavLink>
                         <Link to="/whitepaper">
-                            <Span>WHITEPAPER</Span>
+                            <Span>WHITEPAPER</Span> 
                         </Link>
                     </NavLink>
                 </NavLeft>

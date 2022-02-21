@@ -31,46 +31,13 @@ const getStakedNft = async (tokenId: string) => {
     return results.length > 0 ? results[0]: null;
 }
 
-const getAllStakedNfts = async (tokenId: string) => {
+const getAllStakedNfts = async (nearAccountId: string) => {
     const query = new Parse.Query("StakeNft");
     // use the equalTo filter to look for user which the name is John. this filter can be 
     // used in any data type
-    query.equalTo('tokenId', tokenId);
+    query.equalTo('nearAccountId', nearAccountId);
     query.equalTo('staked', true);
     return await query.findAll();
-}
-
-const getStringTokenId = (token_id: string) => {
-    return "blockhead_" + token_id;
-}
-
-const unstake = async (token_id: string) => {
-    console.log("unstake");
-    let strTokenId = getStringTokenId(token_id);
-    let playTime = await getStakedNft(strTokenId); 
-    if (!playTime) {
-        // No nft to unstake.
-        return;
-    }
-    playTime.set("nearAccountId", 0);
-    playTime.set("tokenId", strTokenId);
-    playTime.set("staked", false);
-  
-    await playTime.save();
-}
-
-const stake = async (token_id: string) => {
-    console.log("stake");
-    let strTokenId = getStringTokenId(token_id);
-    let playTime = await getStakedNft(strTokenId); 
-    if (!playTime) {
-        playTime = new Parse.Object("StakeNft");
-    }
-    playTime.set("nearAccountId", 0);
-    playTime.set("tokenId", strTokenId);
-    playTime.set("staked", true);
-  
-    await playTime.save();
 }
 
 const DisplayNft = ({contract}: Props) => {
@@ -79,7 +46,7 @@ const DisplayNft = ({contract}: Props) => {
     const [displayInfo, setDisplayInfo] = useState(new Map())
 
     const wallet = nearWallet;
-    const mint = async () => {
+    const reloadNfts = async () => {
         //@ts-ignore
         const response = await contract.nft_tokens_for_owner(
             {
@@ -104,7 +71,36 @@ const DisplayNft = ({contract}: Props) => {
     }
 
     if (nfts.length <= 0) {
-        mint()
+        reloadNfts();
+    }
+
+    const unstake = async (token_id: string) => {
+        console.log("unstake");
+        let stakedNft = await getStakedNft(token_id); 
+        if (!stakedNft || stakedNft.length == 0) {
+            // No nft to unstake.
+            return;
+        }
+        stakedNft.set("nearAccountId", nearWallet.getAccountId());
+        stakedNft.set("tokenId", token_id);
+        stakedNft.set("staked", false);
+      
+        await stakedNft.save();
+        reloadNfts();
+    }
+    
+    const stake = async (token_id: string) => {
+        console.log("stake");
+        let stakedNft = await getStakedNft(token_id); 
+        if (!stakedNft || stakedNft.length == 0) {
+            stakedNft = new Parse.Object("StakeNft");
+        }
+        stakedNft.set("nearAccountId", nearWallet.getAccountId());
+        stakedNft.set("tokenId", token_id);
+        stakedNft.set("staked", true);
+      
+        await stakedNft.save();
+        reloadNfts();
     }
 
     const hover = (token_id: string) => {

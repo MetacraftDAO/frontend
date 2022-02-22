@@ -43,13 +43,11 @@ const Dashboard = ({contract, response}: Props) => {
             </Bg>
             <Section>
                 <Container>
-                    <SectionTitle>Your Unstaked BlockHeads</SectionTitle>
+                    <SectionTitle>Your BlockHeads</SectionTitle>
                     <SectionDescription>
-                        Stake your BlockHeads to earn $BUILDs and use them as skins in MetaCraft! Once staked, they
-                        will
-                        remain staked for 3 days minimum, with no maximum duration. Once $BUILD is claimed, you'll
-                        be able
-                        to use these utility
+                        Stake your BlockHeads to earn $BUILDs and use them as skins in MetaCraft! 
+                        
+                        Once $BUILD is claimed, you'll be able to use these utility
                         tokens for upcoming features, and other future projects.
                     </SectionDescription>
                     <DisplayNft contract={contract}/>

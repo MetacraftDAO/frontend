@@ -1,6 +1,6 @@
 import {nearWallet} from "../../libs/wallet";
 import {Contract} from "near-api-js";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Collection, Image,
     NFT,
@@ -44,7 +44,14 @@ const getAllStakedNfts = async (nearAccountId: string) => {
 const DisplayNft = ({contract}: Props) => {
     const [nfts, setNfts] = React.useState<any[]>([]);
     const [overlay, setOverlay] = useState(false)
-    const [displayInfo, setDisplayInfo] = useState(new Map())
+    const [displayInfo, setDisplayInfo] = useState(new Map());
+    const [stakeds, setStakeds] = useState<any[]>([]);
+    const [unstakeds, setUnstakeds] = useState<any[]>([]);
+
+    useEffect(() => {
+        setStakeds(nfts.filter((nft) => nft.isStaked == true));
+        setUnstakeds(nfts.filter((nft) => !nft.isStaked));
+    }, [nfts]);
 
     const wallet = nearWallet;
     const reloadNfts = async () => {
@@ -130,9 +137,43 @@ const DisplayNft = ({contract}: Props) => {
 
     return (
         <>
+            <h1> Unstaked BlockHeads </h1>      
             <Collection>
-                {(nfts.length > 0) ?
-                    nfts.map((nft) => {
+                {(unstakeds.length > 0) ?
+                    unstakeds.map((nft) => {
+                        console.log(nft)
+                        return (<NFT>
+                            <Frame
+                                onMouseEnter={() => hover(nft.token_id)} onMouseLeave={() => hoverleave(nft.token_id)}
+                            >
+                                <Image src={nft.metadata.media} alt={"nft"}
+                                />
+                                {(overlay)?
+                                    <NftTraits>
+                                    <Trait>Skin Type: Robot</Trait>
+                                    <Trait> $BUILD Earned: 100</Trait>
+                                    <Trait>Date Staked: 10/21/21</Trait>
+                                    <Trait>Staked Duration 1d 1H 20M</Trait>
+                                    </NftTraits>
+                                    : <></>}
+                            </Frame>
+
+                            <NFTName>{nft.metadata.title}</NFTName>
+                            <SelectSkin href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)}
+                                        target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>
+                            {(nft.isStaked) ?
+                                <>
+                                    <Stake onClick={() => unstake(nft.token_id.toString())}>UnStake</Stake>
+                                </>
+                                : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
+                        </NFT>)
+                    }) : <p>You do not own any BlockHeads</p>
+                }
+            </Collection>
+            <h1> Staked BlockHeads </h1>     
+            <Collection>
+                {(stakeds.length > 0) ?
+                    stakeds.map((nft) => {
                         console.log(nft)
                         return (<NFT>
                             <Frame

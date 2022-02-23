@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Span } from "../Header/styles";
-import { nearWallet, signIn } from "../../libs/wallet";
-import { isNullishCoalesce } from "typescript";
 declare var window: any;
 
 // Wallet login.

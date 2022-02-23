@@ -19,7 +19,7 @@ module.exports = function override(config, env) {
             fs: 'fs',
         }),
         new NodePolyfillPlugin(),
-        new Dotenv({systemvars: true}) // For netlify auto rebuild.
+        new Dotenv() // For netlify auto rebuild.
     );
     config.experiments = {topLevelAwait: true}
 

@@ -1,7 +1,5 @@
-
 import { nearWallet, signIn } from "../../libs/wallet";
 import { useState } from "react";
-import { nftContract } from '../../libs/contract';
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
 import { Button } from "../Mint/styles";
@@ -48,14 +46,14 @@ const DEFAULT_SUCCESS_MSG = "Account is successfully verified! Go back to game a
 const verify = async (uuid: string | null, username: string | null) => {
   // If wallet not connected or have no nft, return false.
   let connected = await connectedWalletAndHasNft();
-  if (!connected) return [username, false, "Stake a blockhead nft to start playing"];
+  if (!connected) return [username, "Stake a blockhead nft to start playing"];
   let nearAccountId = nearWallet.getAccountId();
 
   let verifiedUser = await fetchVerifiedUserByNearAccountId(nearAccountId);
   // If no existing DB object for near account id.
   if (!verifiedUser) {
     if(!uuid || !username) {
-      return [null, false, "No minecraft account to verify, enter mincraft and type /verify"];
+      return [null, "No minecraft account to verify, enter mincraft and type /verify"];
     }
 
     let existingUser = await fetchVerifiedUserByUUID(uuid);
@@ -65,12 +63,12 @@ const verify = async (uuid: string | null, username: string | null) => {
       // Update the existing uuid player to current near account id.ß
       await updateExistingVerifiedUserInDB(existingUser, uuid, username, nearAccountId, true);
     }
-    return [username, true, DEFAULT_SUCCESS_MSG];
+    return [username, DEFAULT_SUCCESS_MSG];
   }
 
   // If there is a existing DB object for near account id, it's already verified and 
   // the near account is the same as current account, then no need to update the DB.
-  if (verifiedUser.get('isVerified') && (verifiedUser.get('username') == username || !username)) {
+  if (verifiedUser.get('isVerified') && (verifiedUser.get('username') === username || !username)) {
     return [verifiedUser.get('username'), true, DEFAULT_SUCCESS_MSG];
   }
 
@@ -116,16 +114,14 @@ const getUUIDandUsername = ()=>{
 }
 
 const VerifyAccount = () => {
-  const [isVerified, setIsVerified] = useState(false);
   let {uuid, username} = getUUIDandUsername();
   const [linkedUsername, setlinkedUsername] = useState(username);
   const [msg, setMsg] = useState("");
   
   const setVerifyStatus = () => {
     //@ts-ignore
-    verify(uuid, username).then(([username, isVerified, msg]) => {
+    verify(uuid, username).then(([username, msg]) => {
       setlinkedUsername(username);
-      setIsVerified(isVerified);
       setMsg(msg);
     });
   }

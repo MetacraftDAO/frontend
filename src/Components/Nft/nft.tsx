@@ -167,7 +167,7 @@ const DisplayNft = ({contract}: Props) => {
                                 </>
                                 : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
                         </NFT>)
-                    }) : <p>You do not own any BlockHeads</p>
+                    }) : <p>You do not own any unstaked BlockHeads</p>
                 }
             </Collection>
             <h1> Staked BlockHeads </h1>     
@@ -200,7 +200,7 @@ const DisplayNft = ({contract}: Props) => {
                                 </>
                                 : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
                         </NFT>)
-                    }) : <p>You do not own any BlockHeads</p>
+                    }) : <p>You do not own any staked BlockHeads</p>
                 }
             </Collection>
 

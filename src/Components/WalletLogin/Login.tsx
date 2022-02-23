@@ -4,6 +4,7 @@ import { nearWallet, signIn } from "../../libs/wallet";
 import { isNullishCoalesce } from "typescript";
 declare var window: any;
 
+// Wallet login.
 const Login = () => {
   const [defaultAccount, setDefaultAccount] = useState(null);
 

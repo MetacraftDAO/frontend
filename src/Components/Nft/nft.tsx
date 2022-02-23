@@ -49,7 +49,7 @@ const DisplayNft = ({contract}: Props) => {
     const [unstakeds, setUnstakeds] = useState<any[]>([]);
 
     useEffect(() => {
-        setStakeds(nfts.filter((nft) => nft.isStaked == true));
+        setStakeds(nfts.filter((nft) => nft.isStaked === true));
         setUnstakeds(nfts.filter((nft) => !nft.isStaked));
     }, [nfts]);
 
@@ -85,7 +85,7 @@ const DisplayNft = ({contract}: Props) => {
     const unstake = async (token_id: string) => {
         console.log("unstake");
         let stakedNft = await getStakedNft(token_id); 
-        if (!stakedNft || stakedNft.length == 0) {
+        if (!stakedNft || stakedNft.length === 0) {
             // No nft to unstake.
             return;
         }
@@ -98,7 +98,7 @@ const DisplayNft = ({contract}: Props) => {
 
         let allStakedNfts = await getAllStakedNfts(nearWallet.getAccountId());
         //@ts-ignore
-        if (allStakedNfts.length == 0) {
+        if (allStakedNfts.length === 0) {
             let verifiedUser = await fetchVerifiedUserByNearAccountId(nearWallet.getAccountId());
             if (verifiedUser) {
                 verifiedUser.set("isVerified", false);
@@ -110,7 +110,7 @@ const DisplayNft = ({contract}: Props) => {
     const stake = async (token_id: string) => {
         console.log("stake");
         let stakedNft = await getStakedNft(token_id); 
-        if (!stakedNft || stakedNft.length == 0) {
+        if (!stakedNft || stakedNft.length === 0) {
             stakedNft = new Parse.Object("StakeNft");
         }
         stakedNft.set("nearAccountId", nearWallet.getAccountId());

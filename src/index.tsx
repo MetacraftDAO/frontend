@@ -4,11 +4,8 @@ import './index.css';
 import Router from './Router';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import * as nearAPI from 'near-api-js';
 import {nearWallet, getLastTransactionStatus} from "./libs/wallet";
 import { nftContract } from './libs/contract';
-//@ts-ignore
-import Parse from 'parse/dist/parse.min.js';
 
 
 const response = await getLastTransactionStatus();

@@ -1,4 +1,4 @@
-import {Row} from "antd";
+import { Row} from "antd";
 import {Link} from "react-router-dom";
 import {
     NavLink,
@@ -6,8 +6,6 @@ import {
     Span, NavContainer, NavLeft, NavRight,
 } from "./styles";
 import Login from "../WalletLogin/Login";
-import Login2 from "../WalletLogin/Login2";
-
 const Header = () => {
 
     const MenuItem = () => {
@@ -31,16 +29,13 @@ const Header = () => {
                     </NavLink>
                     <NavLink>
                         <Link to="/whitepaper">
-                            <Span>WHITEPAPER</Span> 
+                            <Span>WHITEPAPER</Span>
                         </Link>
                     </NavLink>
                 </NavLeft>
                 <NavRight>
                     <NavLink>
                         <Login/>
-                    </NavLink>
-                    <NavLink>
-                        <Login2/>
                     </NavLink>
                 </NavRight>
             </NavContainer>

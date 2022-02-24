@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import {DownOutlined} from "@ant-design/icons";
+import DropdownButton from "antd/lib/dropdown/dropdown-button";
 
 export const HeaderSection = styled("header")`
   padding: 1rem 4rem;
@@ -52,4 +54,17 @@ export const NavRight = styled.div`
 export const NavLeft = styled.div`
   float: left;
   width: 100%;
+`
+export const WalletButton = styled(DropdownButton)`
+  height: 40px;
+  background-color: black;
+  color: whitesmoke;
+  font-size: 2rem;
+  font-family: "pressstart", sans-serif;
+  border: none;
+  font-weight: bold;
+`
+
+export const Arrow = styled(DownOutlined)`
+  vertical-align: center;
 `

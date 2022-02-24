@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dropdown button{
+  height: 50px;
+  background-color: black;
+  color: whitesmoke;
+  font-size: 2rem;
+  border: 1px solid white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  font-family: 'minecraftchmc',sans-serif;
+  width: 200px;
+}
+
+.dropdown-menu {
+  width: 199px;
+}
+.dropdown-item {
+  display: block;
+  color: white;
+  border: 1px solid white;
+  width: 100%;
+  font-size: 1.3rem;
+  z-index: 99;
+  position: relative;
+  background-color: black;
+}
+
+.react-parallax-bgimage {
+  z-index: -9;
+}
+

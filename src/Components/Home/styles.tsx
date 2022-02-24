@@ -10,6 +10,7 @@ export const Heading = styled.div`
   transform: translate(0%, -50%);
   text-align: center;
   margin-bottom: 5rem;
+  float: right;
 `
 
 export const Title = styled.div`
@@ -20,14 +21,21 @@ export const Title = styled.div`
 export const Overlay = styled.div`
   background-image: linear-gradient(to right, #000000, #4b4a4a);
   height: 100%;
-  width: 50%;
+  width: 100%;
   position: absolute;
   opacity: 0.7;
-  left: -4rem;
+  z-index: -2;
+  left: 50%;
 `
 
 export const Para = styled(Parallax)`
   padding: 0 4rem;
   width: 100%;
+  z-index: -2;
 
+`
+export const Block = styled.div`
+  height: 600px;
+  position: relative;
+  z-index: -2;
 `

@@ -1,6 +1,7 @@
 import {Contract} from "near-api-js";
 
 import {
+    Block,
     Heading,
     Overlay,
     Para,
@@ -15,20 +16,19 @@ interface Props {
 }
 
 const Home = ({contract}: Props) => {
-    const image1 = "https://gmedia.playstation.com/is/image/SIEPDC/minecraft-hero-banner-desktop-01-ps4-en-07jul21?$native$"
     return (
         <>
-                <Para bgImage={image1}
+                <Para bgImage={"/img/minecraft-banner.jpeg"}
                 >
                     <Overlay>
 
                     </Overlay>
-                    <div style={{height: "70vh"}}>
+                    <Block>
                         <Heading>
                             <Title> MetaCraft </Title>
                             <h1> Get NFTs and Craft your World</h1>
                         </Heading>
-                    </div>
+                    </Block>
                 </Para>
 
             <Demo/>

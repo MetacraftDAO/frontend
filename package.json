@@ -14,6 +14,7 @@
     "antd": "^4.18.6",
     "atob": "^2.1.2",
     "bn": "^1.0.5",
+    "html-to-react": "^1.4.8",
     "near-api-js": "^0.43.1",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "parse": "^3.4.1",

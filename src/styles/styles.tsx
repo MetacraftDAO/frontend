@@ -22,8 +22,8 @@ export const Styles = createGlobalStyle`
   
   body,
   html,
-  a,
-  p,
+  /* a, */
+  /* p, */
   span {
     font-family: 'minecraftchmc', sans-serif;
   }

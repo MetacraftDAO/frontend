@@ -10,6 +10,7 @@ import {Contract} from "near-api-js";
 import Dashboard from './Components/Dashboard';
 import Home from './Components/Home'
 import {VerifyAccount} from './Components/VerifyAccount';
+import Whitepaper from './Components/Whitepaper';
 
 interface Props {
     contract: Contract,
@@ -27,7 +28,7 @@ const Router = ({contract, response}: Props) => {
                 <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
                 <Route path="/verify" element={<VerifyAccount/>}/>
                 <Route path="/map"/>
-                <Route path="/whitepaper"/>
+                <Route path="/whitepaper" element={<Whitepaper/>}/>
             </Routes>
             <Footer/>
         </Suspense>

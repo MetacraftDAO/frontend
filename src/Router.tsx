@@ -11,6 +11,7 @@ import Dashboard from './Components/Dashboard';
 import Home from './Components/Home'
 import {VerifyAccount} from './Components/VerifyAccount';
 import Whitepaper from './Components/Whitepaper';
+import HowToPlay from './Components/HowToPlay';
 
 interface Props {
     contract: Contract,
@@ -29,6 +30,7 @@ const Router = ({contract, response}: Props) => {
                 <Route path="/verify" element={<VerifyAccount/>}/>
                 <Route path="/map"/>
                 <Route path="/whitepaper" element={<Whitepaper/>}/>
+                <Route path="/how-to-play" element={<HowToPlay/>}/>
             </Routes>
             <Footer/>
         </Suspense>

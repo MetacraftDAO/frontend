@@ -9,7 +9,7 @@ import {
 import Container from "../Container";
 
 const Play = () => {
-    const nft = "/nft"
+    const howToPlay = "/how-to-play"
     return (
         <Section>
             <Container>
@@ -22,7 +22,7 @@ const Play = () => {
                     Check out how to get started and have more fun...
                 </SectionDescription>
 
-                <PlayNow href={nft}>Play Now</PlayNow>
+                <PlayNow href={howToPlay}>Play Now</PlayNow>
             </Container>
 
         </Section>

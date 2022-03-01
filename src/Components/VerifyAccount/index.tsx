@@ -4,6 +4,7 @@ import { useState } from "react";
 import Parse from 'parse/dist/parse.min.js';
 import { Button } from "../Mint/styles";
 import {getAllStakedNfts} from "../Nft/nft";
+import {Verify} from "./styles";
 
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
@@ -127,11 +128,11 @@ const VerifyAccount = () => {
   }
 
   return (
-    <>
+    <Verify>
     {!linkedUsername ? "" : (<h1>{"Minecraft user " + linkedUsername}</h1>)}
     <h1>{msg}</h1>
     <Button onClick={setVerifyStatus}> Verify account </Button>
-    </>
+    </Verify>
   )
 }
 

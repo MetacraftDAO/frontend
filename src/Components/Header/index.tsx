@@ -23,8 +23,8 @@ const Header = () => {
                         </Link>
                     </NavLink>
                     <NavLink>
-                        <Link to="/map">
-                            <Span>MAP</Span>
+                        <Link to="/how-to-play">
+                            <Span>HOW TO PLAY</Span>
                         </Link>
                     </NavLink>
                     <NavLink>

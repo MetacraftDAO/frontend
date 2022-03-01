@@ -21,6 +21,7 @@ const rawHTML =`
 
 <h2 id="step-5">Step 5</h2>
 <p>Click the verify link, you will be redirected to the metacraft website verify page, click <strong>Verify account</strong> button to verify.</p>
+<p align="center"><img style="max-width: 60%;" src="https://lh3.googleusercontent.com/tCgsKy2Oo6x_v4eJi2xO2UNBDeAgjXhrkx8CGqyHa3SATxizp2tkSdKyi4dPW60gxQwxRaVaGcL_aWzj12pWMY7pWlzOGwQzFumB2a_R6a-UKSObYUN_MkZrxNzuRfh7ur4S_8-Q50Y=w1920-h1080" /></p>
 
 <p align="center"> <img style="max-width: 120%;" src="https://lh3.googleusercontent.com/eI68tRoKquHGpeU_qHalEo8e1WmVyOrQribz2wrDvqDdro4bP7X95aZauXsvvpel14sT6-xoidRdKUIOm_Kkh92dzaweUt8xl3_3Er5SqAw6BSOQ-XHeqMDVNtFAwsGSNS7QFJFBOjk=w600-h315-p-k" /> </p>
 

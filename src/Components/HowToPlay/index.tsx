@@ -26,7 +26,7 @@ const rawHTML =`
 <p align="center"> <img style="max-width: 120%;" src="https://lh3.googleusercontent.com/eI68tRoKquHGpeU_qHalEo8e1WmVyOrQribz2wrDvqDdro4bP7X95aZauXsvvpel14sT6-xoidRdKUIOm_Kkh92dzaweUt8xl3_3Er5SqAw6BSOQ-XHeqMDVNtFAwsGSNS7QFJFBOjk=w600-h315-p-k" /> </p>
 
 
-<h2 id="step">Step</h2>
+<h2 id="step-6">Step</h2>
 <p>Use one of the 2 ways below to enter the game.</p>
 <ul>
 <li>Return to the game and type <code>/login</code> command.</li>
